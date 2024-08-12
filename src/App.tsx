@@ -5,14 +5,25 @@ import { Icon } from "./common-components";
 export default function App() {
   return (
     <Container>
-      <div className={cx("flex", "flex-col", "items-center")}>
-        <TBunLogo />
+      <TBunLogo />
 
-        <div className={cx("grid", "grid-cols-2", "gap-[30px]")}>
-          <LinkButton label="Sticky Notes" href="http://sticky-notes.tbun.dev" />
+      <div
+        className={cx(
+          "w-full",
 
-          <LinkButton label="Color Swatches" href="http://color-swatches.tbun.dev" />
-        </div>
+          "flex",
+          "flex-row",
+          "justify-center",
+          "flex-wrap",
+
+          "p-[30px]",
+          "pt-0",
+          "gap-[30px]",
+        )}
+      >
+        <LinkButton label="Sticky Notes" href="http://sticky-notes.tbun.dev" />
+
+        <LinkButton label="Color Swatches" href="http://color-swatches.tbun.dev" />
       </div>
     </Container>
   );
@@ -28,11 +39,27 @@ function Container({ children }: { children: ReactNode }) {
         "from-[#ffe000]",
         "to-[#ffa000]",
 
-        "grid",
-        "place-content-center",
+        "flex",
+        "flex-col",
+        "items-center",
+        "justify-center",
       )}
     >
-      {children}
+      <div
+        className={cx(
+          "pt-[min(10vw,120px)]",
+
+          "w-full",
+          "max-w-[1200px]",
+          "min-h-[min(58.3vw,700px)]",
+
+          "flex",
+          "flex-col",
+          "items-center",
+        )}
+      >
+        {children}
+      </div>
     </div>
   );
 }
@@ -40,9 +67,9 @@ function Container({ children }: { children: ReactNode }) {
 function TBunLogo() {
   return (
     <div className={cx("flex", "flex-row", "items-center")}>
-      <div className={cx("font-black", "text-[200px]")}>TBUN</div>
+      <div className={cx("font-black", "text-[min(20vw,240px)]")}>TBUN</div>
 
-      <div className={cx("font-normal", "text-[100px]", "w-[1.5ch]")}>.dev</div>
+      <div className={cx("font-normal", "text-[min(10vw,120px)]", "w-[1.5ch]")}>.dev</div>
     </div>
   );
 }
