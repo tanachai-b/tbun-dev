@@ -5,8 +5,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Noto Sans", "sans-serif"],
-        mono: ["Noto Sans Mono", "monospace"],
+        sans: ["Red Hat Display", "sans-serif"],
       },
     },
   },
