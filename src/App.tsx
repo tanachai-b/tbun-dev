@@ -1,29 +1,31 @@
 import cx from "classnames";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { Icon, Resizable } from "./common-components";
 
 export default function App() {
   return (
     <Container>
-      <TBunLogo />
+      <Slide>
+        <TBunLogo />
 
-      <div
-        className={cx(
-          "w-full",
+        <div
+          className={cx(
+            "w-full",
 
-          "flex",
-          "flex-row",
-          "justify-center",
-          "flex-wrap",
+            "flex",
+            "flex-row",
+            "justify-center",
+            "flex-wrap",
 
-          "px-[30px]",
-          "gap-[30px]",
-        )}
-      >
-        <LinkButton label="Sticky Notes" href="http://sticky-notes.tbun.dev" />
+            "px-[30px]",
+            "gap-[30px]",
+          )}
+        >
+          <LinkButton label="Sticky Notes" href="http://sticky-notes.tbun.dev" />
 
-        <LinkButton label="Color Swatches" href="http://color-swatches.tbun.dev" />
-      </div>
+          <LinkButton label="Color Swatches" href="http://color-swatches.tbun.dev" />
+        </div>
+      </Slide>
     </Container>
   );
 }
@@ -42,48 +44,71 @@ function Container({ children }: { children: ReactNode }) {
         "flex-col",
       )}
     >
-      <div
-        className={cx(
-          "size-full",
+      {children}
+    </div>
+  );
+}
 
-          "flex",
-          "flex-col",
-          "items-center",
-          "justify-center",
-        )}
-      >
-        {children}
-      </div>
+function Slide({ children }: { children: ReactNode }) {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setIsLoaded(true), 100);
+  }, []);
+
+  return (
+    <div
+      className={cx(
+        "size-full",
+        "overflow-clip",
+
+        "flex",
+        "flex-col",
+        "items-center",
+        "justify-center",
+
+        isLoaded ? "opacity-100" : "opacity-0",
+        "transition-all",
+        "duration-[1s]",
+      )}
+    >
+      {children}
     </div>
   );
 }
 
 function TBunLogo() {
   const [width, setWidth] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setIsLoaded(true), 100);
+  }, []);
 
   return (
-    <Resizable
-      className={cx(
-        "w-full",
-
-        "flex",
-        "flex-row",
-        "items-center",
-        "justify-center",
-
-        "select-none",
-      )}
-      onResize={({ width }) => setWidth(width)}
-    >
-      <div className={cx("font-black")} style={{ fontSize: `${450 * (width / 2000)}px` }}>
-        TBUN
-      </div>
-
+    <Resizable className={cx("w-full", "select-none")} onResize={({ width }) => setWidth(width)}>
       <div
-        className={cx("font-normal", "w-[1.5ch]")}
-        style={{ fontSize: `${220 * (width / 2000)}px` }}
+        className={cx(
+          "flex",
+          "flex-row",
+          "items-center",
+          "justify-center",
+
+          isLoaded ? "scale-100" : "scale-[200%]",
+          "transition-all",
+          "duration-[1s]",
+        )}
       >
-        .dev
+        <div className={cx("font-black")} style={{ fontSize: `${400 * (width / 1920)}px` }}>
+          TBUN
+        </div>
+
+        <div
+          className={cx("font-normal", "w-[1.5ch]")}
+          style={{ fontSize: `${200 * (width / 1920)}px` }}
+        >
+          .dev
+        </div>
       </div>
     </Resizable>
   );
