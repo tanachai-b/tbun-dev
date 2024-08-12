@@ -1,6 +1,6 @@
 import cx from "classnames";
-import { ReactNode } from "react";
-import { Icon } from "./common-components";
+import { ReactNode, useState } from "react";
+import { Icon, Resizable } from "./common-components";
 
 export default function App() {
   return (
@@ -16,8 +16,7 @@ export default function App() {
           "justify-center",
           "flex-wrap",
 
-          "p-[30px]",
-          "pt-0",
+          "px-[30px]",
           "gap-[30px]",
         )}
       >
@@ -41,21 +40,16 @@ function Container({ children }: { children: ReactNode }) {
 
         "flex",
         "flex-col",
-        "items-center",
-        "justify-center",
       )}
     >
       <div
         className={cx(
-          "pt-[min(10vw,120px)]",
-
-          "w-full",
-          "max-w-[1200px]",
-          "min-h-[min(58.3vw,700px)]",
+          "size-full",
 
           "flex",
           "flex-col",
           "items-center",
+          "justify-center",
         )}
       >
         {children}
@@ -65,12 +59,33 @@ function Container({ children }: { children: ReactNode }) {
 }
 
 function TBunLogo() {
-  return (
-    <div className={cx("flex", "flex-row", "items-center")}>
-      <div className={cx("font-black", "text-[min(20vw,240px)]")}>TBUN</div>
+  const [width, setWidth] = useState(0);
 
-      <div className={cx("font-normal", "text-[min(10vw,120px)]", "w-[1.5ch]")}>.dev</div>
-    </div>
+  return (
+    <Resizable
+      className={cx(
+        "w-full",
+
+        "flex",
+        "flex-row",
+        "items-center",
+        "justify-center",
+
+        "select-none",
+      )}
+      onResize={({ width }) => setWidth(width)}
+    >
+      <div className={cx("font-black")} style={{ fontSize: `${450 * (width / 2000)}px` }}>
+        TBUN
+      </div>
+
+      <div
+        className={cx("font-normal", "w-[1.5ch]")}
+        style={{ fontSize: `${220 * (width / 2000)}px` }}
+      >
+        .dev
+      </div>
+    </Resizable>
   );
 }
 
