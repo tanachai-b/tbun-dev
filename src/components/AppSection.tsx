@@ -1,20 +1,22 @@
 import cx from "classnames";
-import { Fragment, ReactNode, useState } from "react";
+import { Fragment, ReactNode, RefObject, useState } from "react";
 import { Intersectable, LinkButton, Resizable } from "src/common-components";
 
 export function AppSection({
+  divRef,
   image,
   title,
   description,
   href,
 }: {
+  divRef: RefObject<HTMLDivElement>;
   image: string;
   title: ReactNode;
   description: ReactNode;
   href: string;
 }) {
   return (
-    <Container>
+    <Container divRef={divRef}>
       <SlideRight className={cx("size-full", "bg-[white]", "grid")}>
         <div
           className={cx("size-full", "bg-cover", "bg-center")}
@@ -37,11 +39,18 @@ export function AppSection({
   );
 }
 
-function Container({ children }: { children: ReactNode }) {
+function Container({
+  divRef,
+  children,
+}: {
+  divRef: RefObject<HTMLDivElement>;
+  children: ReactNode;
+}) {
   const [size, setSize] = useState({ width: 0, height: 0 });
 
   return (
     <Resizable
+      divRef={divRef}
       className={cx(
         "w-full",
         "h-[calc(100vh-100px)]",

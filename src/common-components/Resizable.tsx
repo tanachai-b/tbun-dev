@@ -1,17 +1,20 @@
-import { CSSProperties, ReactNode, useEffect, useRef } from "react";
+import { CSSProperties, ReactNode, RefObject, useEffect, useRef } from "react";
 
 export function Resizable({
+  divRef,
   className,
   style,
   children,
   onResize,
 }: {
+  divRef?: RefObject<HTMLDivElement>;
   className?: string;
   style?: CSSProperties;
   children: ReactNode;
   onResize: (boundingClientRect: DOMRect) => void;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
+  const baseRef = useRef<HTMLDivElement>(null);
+  const ref = divRef ?? baseRef;
 
   useEffect(() => {
     if (!ref.current) return;
