@@ -94,9 +94,8 @@ function SlideRight({ className, children }: { className?: string; children: Rea
   return (
     <Intersectable
       className={className}
-      onIntersect={(r2) => {
-        if (r2 > 0.5) setIsVisible(true);
-        // if (r2 === 0) setIsVisible(false);
+      onIntersect={(ratio) => {
+        if (ratio > 0.2) setIsVisible(true);
       }}
     >
       <div
@@ -119,9 +118,8 @@ function SlideLeft({ className, children }: { className?: string; children: Reac
   return (
     <Intersectable
       className={className}
-      onIntersect={(r2) => {
-        if (r2 > 0.5) setIsVisible(true);
-        // if (r2 === 0) setIsVisible(false);
+      onIntersect={(ratio) => {
+        if (ratio > 0.2) setIsVisible(true);
       }}
     >
       <div

@@ -1,11 +1,10 @@
 import cx from "classnames";
-import { ReactNode } from "react";
 import { color_swatches, sticky_notes } from "./assets";
 import { AppSection, BackgroundGradient, Copyright, HomeSection } from "./components";
 
 export default function App() {
   return (
-    <Container>
+    <div className={cx("flex", "flex-col")}>
       <BackgroundGradient />
 
       <HomeSection />
@@ -39,21 +38,6 @@ export default function App() {
       />
 
       <Copyright />
-    </Container>
-  );
-}
-
-function Container({ children }: { children: ReactNode }) {
-  return (
-    <div
-      className={cx(
-        "w-full",
-
-        "flex",
-        "flex-col",
-      )}
-    >
-      {children}
     </div>
   );
 }

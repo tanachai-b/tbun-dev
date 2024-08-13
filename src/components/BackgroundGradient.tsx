@@ -6,9 +6,9 @@ export function BackgroundGradient() {
       className={cx(
         "sticky",
         "top-0",
+        "z-[-1]",
 
         "h-0",
-        "z-[-100]",
       )}
     >
       <div

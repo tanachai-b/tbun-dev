@@ -67,7 +67,7 @@ function TBunLogo({ factor }: { factor: number }) {
         TBUN
       </div>
 
-      <div className={cx("font-normal", "w-[1.5ch]")} style={{ fontSize: `${200 * factor}px` }}>
+      <div className={cx("w-[1.5ch]")} style={{ fontSize: `${200 * factor}px` }}>
         .dev
       </div>
     </div>

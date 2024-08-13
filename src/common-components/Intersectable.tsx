@@ -21,7 +21,7 @@ export function Intersectable({
         if (!ref.current) return;
         onIntersect(entry.intersectionRatio);
       },
-      { threshold: [0, 0.5, 1] },
+      { threshold: [...Array.from({ length: 10 }, (_v, i) => i / 10), 1] },
     );
 
     intersectionObserver.observe(ref.current);
