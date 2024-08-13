@@ -1,6 +1,6 @@
 import cx from "classnames";
-import { ReactNode, useState } from "react";
-import { LinkButton, Resizable } from "src/common-components";
+import { Fragment, ReactNode, useState } from "react";
+import { Intersectable, LinkButton, Resizable } from "src/common-components";
 
 export function AppSection({
   image,
@@ -15,17 +15,24 @@ export function AppSection({
 }) {
   return (
     <Container>
-      <div className={cx("bg-cover", "bg-center")} style={{ backgroundImage: `url(${image})` }} />
+      <SlideRight className={cx("size-full", "bg-[white]", "grid")}>
+        <div
+          className={cx("size-full", "bg-cover", "bg-center")}
+          style={{ backgroundImage: `url(${image})` }}
+        />
+      </SlideRight>
 
-      <Detail>
-        <div className={cx("text-[70px]", "font-black", "leading-none")}>{title}</div>
+      <SlideLeft className={cx("size-full", "bg-[white]", "grid")}>
+        <Detail>
+          <div className={cx("text-[70px]", "font-black", "leading-none")}>{title}</div>
 
-        <div className={cx("text-[20px]")}>{description}</div>
+          <div className={cx("text-[20px]")}>{description}</div>
 
-        <LinkButton className={cx("w-[150px]")} href={href}>
-          OPEN
-        </LinkButton>
-      </Detail>
+          <LinkButton className={cx("w-[150px]")} href={href}>
+            OPEN
+          </LinkButton>
+        </Detail>
+      </SlideLeft>
     </Container>
   );
 }
@@ -38,6 +45,9 @@ function Container({ children }: { children: ReactNode }) {
       className={cx(
         "w-full",
         "h-[calc(100vh-100px)]",
+
+        "bg-[white]",
+        "overflow-clip",
 
         size.width > size.height ? ["grid", "grid-cols-2"] : ["grid", "grid-rows-2"],
       )}
@@ -54,9 +64,7 @@ function Detail({ children }: { children: ReactNode }) {
   return (
     <div
       className={cx(
-        "bg-[white]",
-        "h-full",
-
+        "size-full",
         "p-[10px]",
 
         "flex",
@@ -69,13 +77,63 @@ function Detail({ children }: { children: ReactNode }) {
     >
       <div className={cx("flex-auto", "max-h-[30px]")} />
 
-      {childrenArray.map((v) => (
-        <>
-          {v}
+      {childrenArray.map((child, i) => (
+        <Fragment key={i}>
+          {child}
 
           <div className={cx("flex-auto", "max-h-[30px]")} />
-        </>
+        </Fragment>
       ))}
     </div>
+  );
+}
+
+function SlideRight({ className, children }: { className?: string; children: ReactNode }) {
+  const [isVisible, setIsVisible] = useState(false);
+
+  return (
+    <Intersectable
+      className={className}
+      onIntersect={(r2) => {
+        if (r2 > 0.5) setIsVisible(true);
+        // if (r2 === 0) setIsVisible(false);
+      }}
+    >
+      <div
+        className={cx(
+          "relative",
+          !isVisible ? ["right-[200px]", "opacity-0"] : ["right-0", "opacity-100"],
+          "transition-all",
+          "duration-[500ms]",
+        )}
+      >
+        {children}
+      </div>
+    </Intersectable>
+  );
+}
+
+function SlideLeft({ className, children }: { className?: string; children: ReactNode }) {
+  const [isVisible, setIsVisible] = useState(false);
+
+  return (
+    <Intersectable
+      className={className}
+      onIntersect={(r2) => {
+        if (r2 > 0.5) setIsVisible(true);
+        // if (r2 === 0) setIsVisible(false);
+      }}
+    >
+      <div
+        className={cx(
+          "relative",
+          !isVisible ? ["left-[200px]", "opacity-0"] : ["left-0", "opacity-100"],
+          "transition-all",
+          "duration-[500ms]",
+        )}
+      >
+        {children}
+      </div>
+    </Intersectable>
   );
 }
