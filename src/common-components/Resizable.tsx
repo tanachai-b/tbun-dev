@@ -1,11 +1,13 @@
-import { ReactNode, useEffect, useRef } from "react";
+import { CSSProperties, ReactNode, useEffect, useRef } from "react";
 
 export function Resizable({
   className,
+  style,
   children,
   onResize,
 }: {
   className?: string;
+  style?: CSSProperties;
   children: ReactNode;
   onResize: (boundingClientRect: DOMRect) => void;
 }) {
@@ -24,7 +26,7 @@ export function Resizable({
   }, [ref.current, onResize]);
 
   return (
-    <div ref={ref} className={className}>
+    <div ref={ref} className={className} style={style}>
       {children}
     </div>
   );
