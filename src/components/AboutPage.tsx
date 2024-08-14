@@ -1,8 +1,8 @@
 import cx from "classnames";
 import { useState } from "react";
 import { email_logo, github_logo, linkedin_logo } from "src/assets";
-import { Copyright } from ".";
-import { Resizable } from "../common-components";
+import { Resizable } from "src/common-components";
+import { Copyright } from "./Copyright";
 
 export function AboutPage() {
   const [width, setWidth] = useState(0);
