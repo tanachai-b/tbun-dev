@@ -1,16 +1,8 @@
 import cx from "classnames";
 import { useRef } from "react";
 import { color_swatches, sticky_notes } from "./assets";
-import {
-  AppSection,
-  BackgroundGradient,
-  Copyright,
-  HomeSection,
-  NavBar,
-  NavBarItem,
-  NavScreenItem,
-  ResponsiveNav,
-} from "./components";
+import { NavBar, NavBarItem, NavScreenItem, ResponsiveNav } from "./common-components";
+import { AppSection, BackgroundGradient, Copyright, HomeSection } from "./components";
 
 export default function App() {
   const stickyNotesRef = useRef<HTMLDivElement>(null);
