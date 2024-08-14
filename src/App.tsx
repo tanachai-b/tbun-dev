@@ -103,7 +103,7 @@ export default function App() {
         title="Color Swatches"
         description={
           <>
-            <p>All colors, equal distances.</p>
+            <p>Generate equal distance color swatches.</p>
             <p>Sorted by hue, chroma, and lightness.</p>
           </>
         }
