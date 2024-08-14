@@ -1,23 +1,33 @@
 import cx from "classnames";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { color_swatches, sticky_notes } from "./assets";
 import { NavBar, NavBarItem, NavScreenItem, ResponsiveNav } from "./common-components";
-import { AppSection, BackgroundGradient, Copyright, HomeSection } from "./components";
+import { AboutPage, AppSection, BackgroundGradient, Copyright, HomeSection } from "./components";
 
 export default function App() {
+  const [page, setPage] = useState<"apps" | "about">("apps");
+
   const stickyNotesRef = useRef<HTMLDivElement>(null);
   const colorSwatchesRef = useRef<HTMLDivElement>(null);
 
   function onClickLogo() {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    setPage("apps");
+    setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 0);
   }
 
   function onClickStickyNotes() {
-    stickyNotesRef.current?.scrollIntoView({ behavior: "smooth" });
+    setPage("apps");
+    setTimeout(() => stickyNotesRef.current?.scrollIntoView({ behavior: "smooth" }), 0);
   }
 
   function onClickColorSwatches() {
-    colorSwatchesRef.current?.scrollIntoView({ behavior: "smooth" });
+    setPage("apps");
+    setTimeout(() => colorSwatchesRef.current?.scrollIntoView({ behavior: "smooth" }), 0);
+  }
+
+  function onClickAbout() {
+    setPage("about");
+    setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 0);
   }
 
   return (
@@ -38,7 +48,7 @@ export default function App() {
 
               <div className={cx("flex-auto")} />
 
-              {/* <NavBarItem onClick={() => {}}>About</NavBarItem> */}
+              <NavBarItem onClick={onClickAbout}>About</NavBarItem>
             </>
           }
           navScreenItems={(closeMenu) => (
@@ -72,45 +82,58 @@ export default function App() {
 
               <div className={cx("h-[20px]")} />
 
-              {/* <NavScreenItem onClick={() => {}}>About</NavScreenItem> */}
+              <NavScreenItem
+                onClick={() => {
+                  onClickAbout();
+                  closeMenu();
+                }}
+              >
+                About
+              </NavScreenItem>
             </>
           )}
         />
       </NavBar>
 
-      <HomeSection />
+      {page === "apps" && (
+        <>
+          <HomeSection />
 
-      <div className={cx("h-[50px]", "bg-[#202020]")} />
+          <div className={cx("h-[50px]", "bg-[#202020]")} />
 
-      <AppSection
-        divRef={stickyNotesRef}
-        image={sticky_notes}
-        title="Sticky Notes"
-        description={
-          <>
-            <p>Realistic sticky notes.</p>
-            <p>No more small texts, scrolling, and resizable papers!</p>
-          </>
-        }
-        href="http://sticky-notes.tbun.dev"
-      />
+          <AppSection
+            divRef={stickyNotesRef}
+            image={sticky_notes}
+            title="Sticky Notes"
+            description={
+              <>
+                <p>Realistic sticky notes.</p>
+                <p>No more small texts, scrolling, and resizable papers!</p>
+              </>
+            }
+            href="http://sticky-notes.tbun.dev"
+          />
 
-      <div className={cx("h-[50px]", "bg-[#202020]")} />
+          <div className={cx("h-[50px]", "bg-[#202020]")} />
 
-      <AppSection
-        divRef={colorSwatchesRef}
-        image={color_swatches}
-        title="Color Swatches"
-        description={
-          <>
-            <p>Generate equal distance color swatches.</p>
-            <p>Sorted by hue, chroma, and lightness.</p>
-          </>
-        }
-        href="http://color-swatches.tbun.dev"
-      />
+          <AppSection
+            divRef={colorSwatchesRef}
+            image={color_swatches}
+            title="Color Swatches"
+            description={
+              <>
+                <p>Generate equal distance color swatches.</p>
+                <p>Sorted by hue, chroma, and lightness.</p>
+              </>
+            }
+            href="http://color-swatches.tbun.dev"
+          />
 
-      <Copyright />
+          <Copyright />
+        </>
+      )}
+
+      {page === "about" && <AboutPage />}
     </div>
   );
 }
