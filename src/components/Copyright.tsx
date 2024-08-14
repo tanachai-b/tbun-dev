@@ -22,6 +22,7 @@ export function Copyright() {
 
         <div className={cx("text-[30px]", "w-[1.5ch]")}>.dev</div>
       </div>
+
       <div>Copyright © 2024 Tanachai Bunlutangtum. All rights reserved.</div>
     </div>
   );

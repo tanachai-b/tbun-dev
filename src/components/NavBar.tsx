@@ -1,13 +1,7 @@
 import cx from "classnames";
-import { MouseEventHandler, ReactNode, RefObject, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
-export function NavBar({
-  stickyNotesRef,
-  colorSwatchesRef,
-}: {
-  stickyNotesRef: RefObject<HTMLDivElement>;
-  colorSwatchesRef: RefObject<HTMLDivElement>;
-}) {
+export function NavBar({ children }: { children: ReactNode }) {
   const [scroll, setScroll] = useState(0);
 
   useEffect(() => window.addEventListener("scroll", () => setScroll(window.scrollY)), []);
@@ -16,42 +10,7 @@ export function NavBar({
     <Container>
       <GradientBackground />
 
-      <Content>
-        <TBunLogo
-          onClick={() => {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-            // window.history.pushState("", "", "/");
-          }}
-        />
-
-        <NavItem
-          onClick={() => {
-            stickyNotesRef.current?.scrollIntoView({ behavior: "smooth" });
-            // window.history.pushState("", "", "/sticky-notes");
-          }}
-        >
-          Sticky Notes
-        </NavItem>
-
-        <NavItem
-          onClick={() => {
-            colorSwatchesRef.current?.scrollIntoView({ behavior: "smooth" });
-            // window.history.pushState("", "", "/color-swatches");
-          }}
-        >
-          Color Swatches
-        </NavItem>
-
-        <div className={cx("grow")} />
-
-        {/* <NavItem
-          onClick={() => {
-            window.history.pushState("", "", "/about");
-          }}
-        >
-          About
-        </NavItem> */}
-      </Content>
+      <Content>{children}</Content>
 
       <ForegroundShadow isVisible={scroll > window.innerHeight - 100} />
     </Container>
@@ -59,6 +18,13 @@ export function NavBar({
 }
 
 function Container({ children }: { children: ReactNode }) {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setIsLoaded(false);
+    setTimeout(() => setIsLoaded(true), 0);
+  }, []);
+
   return (
     <div
       className={cx(
@@ -68,6 +34,10 @@ function Container({ children }: { children: ReactNode }) {
 
         "h-[50px]",
         "overflow-clip",
+
+        !isLoaded ? "opacity-0" : "",
+        "transition-all",
+        "duration-[1s]",
 
         "relative",
       )}
@@ -87,7 +57,6 @@ function Content({ children }: { children: ReactNode }) {
 
         "flex",
         "flex-row",
-        "items-stretch",
 
         "px-[15px]",
       )}
@@ -102,7 +71,6 @@ function GradientBackground() {
     <div
       className={cx(
         "absolute",
-        "inset-0",
 
         "h-[100vh]",
         "w-[100vw]",
@@ -127,51 +95,5 @@ function ForegroundShadow({ isVisible }: { isVisible: boolean }) {
         isVisible ? "shadow-[0_10px_20px_0_#000000]" : "",
       )}
     />
-  );
-}
-
-function TBunLogo({ onClick }: { onClick: MouseEventHandler }) {
-  return (
-    <button
-      className={cx(
-        "hover:bg-[#000000]",
-        "hover:text-[#ffffff]",
-        "transition-all",
-
-        "grid",
-        "place-items-center",
-
-        "px-[15px]",
-
-        "font-black",
-        "text-[30px]",
-      )}
-      onClick={onClick}
-    >
-      TBUN
-    </button>
-  );
-}
-
-function NavItem({ children, onClick }: { children: ReactNode; onClick: MouseEventHandler }) {
-  return (
-    <button
-      className={cx(
-        "hover:bg-[#000000]",
-        "hover:text-[#ffffff]",
-        "transition-all",
-
-        "grid",
-        "place-items-center",
-
-        "px-[15px]",
-
-        "font-bold",
-        "text-[15px]",
-      )}
-      onClick={onClick}
-    >
-      {children}
-    </button>
   );
 }

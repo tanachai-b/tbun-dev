@@ -4,22 +4,14 @@ export function BackgroundGradient() {
   return (
     <div
       className={cx(
-        "sticky",
-        "top-0",
+        "fixed",
+        "inset-0",
         "z-[-1]",
 
-        "h-0",
+        "bg-gradient-to-br",
+        "from-[#ffe000]",
+        "to-[#ffa000]",
       )}
-    >
-      <div
-        className={cx(
-          "h-[100vh]",
-
-          "bg-gradient-to-br",
-          "from-[#ffe000]",
-          "to-[#ffa000]",
-        )}
-      />
-    </div>
+    />
   );
 }

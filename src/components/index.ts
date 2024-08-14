@@ -3,3 +3,7 @@ export * from "./BackgroundGradient";
 export * from "./Copyright";
 export * from "./HomeSection";
 export * from "./NavBar";
+export * from "./NavBarItem";
+export * from "./NavScreen";
+export * from "./NavScreenItem";
+export * from "./ResponsiveNav";
