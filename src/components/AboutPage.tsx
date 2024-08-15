@@ -13,7 +13,8 @@ export function AboutPage() {
           <span className={cx("font-black")}>
             Hi, I’m a senior software engineer based in Bangkok, Thailand.
           </span>{" "}
-          I develop web applications. I work on both front-end and back-end.
+          I am a full-stack developer. I develop web applications. I work on both front-end and
+          back-end.
         </div>
 
         <Contact>
@@ -64,6 +65,8 @@ function InfoSection({ children }: { children: ReactNode }) {
   return (
     <div
       className={cx(
+        "flex-auto",
+
         "h-[500px]",
         "bg-[white]",
 
@@ -84,6 +87,7 @@ function InfoSection({ children }: { children: ReactNode }) {
           "gap-[50px]",
 
           "text-[17px]",
+          "text-justify",
         )}
       >
         {children}
@@ -131,6 +135,7 @@ function ContactButton({ src, label, href }: { src: string; label: string; href:
         "font-bold",
       )}
       href={href}
+      target="_blank"
     >
       <div
         className={cx("bg-current", "size-[40px]")}

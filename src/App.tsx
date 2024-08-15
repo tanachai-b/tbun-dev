@@ -29,7 +29,7 @@ export default function App() {
   }
 
   return (
-    <div className={cx("flex", "flex-col")}>
+    <div className={cx("min-h-full", "flex", "flex-col")}>
       <BackgroundGradient />
 
       <Navigation
