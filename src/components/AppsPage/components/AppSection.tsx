@@ -17,14 +17,14 @@ export function AppSection({
 }) {
   return (
     <Container divRef={divRef}>
-      <SlideRight className={cx("size-full", "bg-[white]", "grid")}>
+      <SlideIn from="left">
         <div
           className={cx("size-full", "bg-cover", "bg-center")}
           style={{ backgroundImage: `url(${image})` }}
         />
-      </SlideRight>
+      </SlideIn>
 
-      <SlideLeft className={cx("size-full", "bg-[white]", "grid")}>
+      <SlideIn from="right">
         <Detail>
           <div className={cx("text-[70px]", "font-black", "leading-none")}>{title}</div>
 
@@ -34,7 +34,7 @@ export function AppSection({
             OPEN
           </LinkButton>
         </Detail>
-      </SlideLeft>
+      </SlideIn>
     </Container>
   );
 }
@@ -68,7 +68,7 @@ function Container({
 }
 
 function Detail({ children }: { children: ReactNode }) {
-  const childrenArray = Array.isArray(children) ? children : [children];
+  const childrenArray: ReactNode[] = Array.isArray(children) ? children : [children];
 
   return (
     <div
@@ -97,12 +97,12 @@ function Detail({ children }: { children: ReactNode }) {
   );
 }
 
-function SlideRight({ className, children }: { className?: string; children: ReactNode }) {
+function SlideIn({ from, children }: { from: "left" | "right"; children: ReactNode }) {
   const [isVisible, setIsVisible] = useState(false);
 
   return (
     <Intersectable
-      className={className}
+      className={cx("grid")}
       onIntersect={(ratio) => {
         if (ratio > 0.2) setIsVisible(true);
       }}
@@ -110,31 +110,13 @@ function SlideRight({ className, children }: { className?: string; children: Rea
       <div
         className={cx(
           "relative",
-          !isVisible ? ["right-[200px]", "opacity-0"] : ["right-0", "opacity-100"],
-          "transition-all",
-          "duration-[500ms]",
-        )}
-      >
-        {children}
-      </div>
-    </Intersectable>
-  );
-}
 
-function SlideLeft({ className, children }: { className?: string; children: ReactNode }) {
-  const [isVisible, setIsVisible] = useState(false);
+          !isVisible
+            ? from === "left"
+              ? ["left-[-200px]", "opacity-0"]
+              : ["left-[200px]", "opacity-0"]
+            : ["left-0", "opacity-100"],
 
-  return (
-    <Intersectable
-      className={className}
-      onIntersect={(ratio) => {
-        if (ratio > 0.2) setIsVisible(true);
-      }}
-    >
-      <div
-        className={cx(
-          "relative",
-          !isVisible ? ["left-[200px]", "opacity-0"] : ["left-0", "opacity-100"],
           "transition-all",
           "duration-[500ms]",
         )}

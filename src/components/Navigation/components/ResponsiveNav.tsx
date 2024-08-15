@@ -2,46 +2,39 @@ import cx from "classnames";
 import { ReactNode, RefObject, useRef, useState } from "react";
 import { Icon, Resizable } from "src/common-components";
 import { NavBarItem } from "./NavBarItem";
-import { NavScreen } from "./NavScreen";
 
 export function ResponsiveNav({
-  navItems,
-  navScreenItems,
+  children,
+  onClickOverflowMenu,
+  onOverflowChange,
 }: {
-  navItems: ReactNode;
-  navScreenItems: (closeMenu: () => void) => ReactNode;
+  children: ReactNode;
+  onClickOverflowMenu: () => void;
+  onOverflowChange: (isOverflow: boolean) => void;
 }) {
   const menuRef = useRef<HTMLDivElement>(null);
 
   const [isOverflow, setIsOverflow] = useState(false);
-  const [isShowNavScreen, setIsShowNavScreen] = useState(false);
 
   return (
     <Container
       onResize={({ width }) => {
         const isOverflow = (menuRef.current?.clientWidth ?? 0) > width;
         setIsOverflow(isOverflow);
-        if (!isOverflow) setIsShowNavScreen(false);
+        onOverflowChange(isOverflow);
       }}
     >
       <FullNav menuRef={menuRef} isVisible={!isOverflow}>
-        {navItems}
+        {children}
       </FullNav>
 
       <OverflowNav isVisible={isOverflow}>
-        <NavBarItem onClick={() => setIsShowNavScreen(true)}>
+        <NavBarItem onClick={onClickOverflowMenu}>
           <div className={cx("grid", "text-[25px]")}>
             <Icon icon="menu" />
           </div>
         </NavBarItem>
       </OverflowNav>
-
-      <NavScreen
-        isVisible={isOverflow && isShowNavScreen}
-        onClose={() => setIsShowNavScreen(false)}
-      >
-        {navScreenItems(() => setIsShowNavScreen(false))}
-      </NavScreen>
     </Container>
   );
 }

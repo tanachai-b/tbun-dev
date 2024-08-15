@@ -1,5 +1,5 @@
 export * from "./AboutPage";
-export * from "./AppSection";
+export * from "./AppsPage";
 export * from "./BackgroundGradient";
 export * from "./Copyright";
-export * from "./HomeSection";
+export * from "./Navigation";

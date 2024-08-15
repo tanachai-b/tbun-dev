@@ -38,27 +38,6 @@ function Container({ children }: { children: ReactNode }) {
         !isLoaded ? "opacity-0" : "",
         "transition-all",
         "duration-[1s]",
-
-        "relative",
-      )}
-    >
-      {children}
-    </div>
-  );
-}
-
-function Content({ children }: { children: ReactNode }) {
-  return (
-    <div
-      className={cx(
-        "relative",
-
-        "size-full",
-
-        "flex",
-        "flex-row",
-
-        "px-[15px]",
       )}
     >
       {children}
@@ -83,11 +62,33 @@ function GradientBackground() {
   );
 }
 
+function Content({ children }: { children: ReactNode }) {
+  return (
+    <div
+      className={cx(
+        "absolute",
+
+        "size-full",
+
+        "flex",
+        "flex-row",
+
+        "px-[15px]",
+      )}
+    >
+      {children}
+    </div>
+  );
+}
+
 function ForegroundShadow({ isVisible }: { isVisible: boolean }) {
   return (
     <div
       className={cx(
-        "relative",
+        "absolute",
+
+        "size-full",
+        "top-[100%]",
 
         "pointer-events-none",
 

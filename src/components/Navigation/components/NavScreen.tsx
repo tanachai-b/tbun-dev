@@ -39,6 +39,7 @@ function Container({ isVisible, children }: { isVisible: boolean; children: Reac
       className={cx(
         "fixed",
         "inset-0",
+        "z-[1]",
 
         "bg-[#000000e0]",
         "backdrop-blur-[10px]",

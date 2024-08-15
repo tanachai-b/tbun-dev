@@ -1,89 +1,104 @@
 import cx from "classnames";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { email_logo, github_logo, linkedin_logo } from "src/assets";
 import { Resizable } from "src/common-components";
-import { Copyright } from "./Copyright";
 
 export function AboutPage() {
+  return (
+    <>
+      <HeaderSection />
+
+      <InfoSection>
+        <div>
+          <span className={cx("font-black")}>
+            Hi, I’m a senior software engineer based in Bangkok, Thailand.
+          </span>{" "}
+          I develop web applications. I work on both front-end and back-end.
+        </div>
+
+        <Contact>
+          <ContactButton src={github_logo} label="GitHub" href="https://github.com/tanachai-b" />
+
+          <ContactButton
+            src={linkedin_logo}
+            label="LinkedIn"
+            href="https://www.linkedin.com/in/tanachai-bunlutangtum/"
+          />
+
+          <ContactButton src={email_logo} label="Email" href="mailto:tanachai.bun@gmail.com" />
+        </Contact>
+      </InfoSection>
+    </>
+  );
+}
+
+function HeaderSection() {
   const [width, setWidth] = useState(0);
 
   return (
-    <>
-      <Resizable
-        className={cx(
-          "h-[500px]",
+    <Resizable
+      className={cx(
+        "h-[500px]",
 
-          "grid",
-          "place-items-center",
+        "grid",
+        "place-items-center",
 
-          "overflow-clip",
-        )}
-        onResize={({ width }) => setWidth(width)}
+        "overflow-clip",
+      )}
+      onResize={({ width }) => setWidth(width)}
+    >
+      <div
+        className={cx("text-center")}
+        style={{
+          fontSize: `${Math.min(200 * (width / 1920), 50)}px`,
+          letterSpacing: `${0.5 * (width / 1920)}em`,
+        }}
       >
-        <div
-          className={cx("text-center")}
-          style={{
-            fontSize: `${Math.min(200 * (width / 1920), 50)}px`,
-            letterSpacing: `${0.5 * (width / 1920)}em`,
-          }}
-        >
-          <span className={cx("font-black")}>TANACHAI</span> <span>BUNLUTANGTUM</span>
-        </div>
-      </Resizable>
+        <span className={cx("font-black")}>TANACHAI</span> <span>BUNLUTANGTUM</span>
+      </div>
+    </Resizable>
+  );
+}
 
+function InfoSection({ children }: { children: ReactNode }) {
+  return (
+    <div
+      className={cx(
+        "h-[500px]",
+        "bg-[white]",
+
+        "flex",
+        "flex-row",
+        "justify-center",
+      )}
+    >
       <div
         className={cx(
-          "bg-[white]",
+          "w-[500px]",
 
           "flex",
-          "flex-row",
-          "justify-center",
+          "flex-col",
+
+          "p-[20px]",
+          "pt-[50px]",
+          "gap-[50px]",
+
+          "text-[17px]",
         )}
       >
-        <div
-          className={cx(
-            "w-[500px]",
-            "h-[500px]",
-
-            "flex",
-            "flex-col",
-
-            "p-[20px]",
-            "pt-[50px]",
-            "gap-[50px]",
-          )}
-        >
-          <div className={cx("text-[17px]")}>
-            <span className={cx("font-black")}>
-              Hi, I’m a senior software engineer based in Bangkok, Thailand.{" "}
-            </span>
-            I develop web applications. I work on both front-end and back-end.
-          </div>
-
-          <div className={cx("flex", "flex-col", "items-center", "gap-[20px]")}>
-            <div className={cx("text-[20px]", "font-black", "tracking-[0.25em]")}>CONTACT</div>
-
-            <div className={cx("grid", "grid-cols-3", "gap-[20px]")}>
-              <ContactButton
-                src={github_logo}
-                label="GitHub"
-                href="https://github.com/tanachai-b"
-              />
-
-              <ContactButton
-                src={linkedin_logo}
-                label="LinkedIn"
-                href="https://www.linkedin.com/in/tanachai-bunlutangtum/"
-              />
-
-              <ContactButton src={email_logo} label="Email" href="mailto:tanachai.bun@gmail.com" />
-            </div>
-          </div>
-        </div>
+        {children}
       </div>
+    </div>
+  );
+}
 
-      <Copyright />
-    </>
+function Contact({ children }: { children: ReactNode }) {
+  return (
+    <div className={cx("flex", "flex-col", "items-center", "gap-[20px]")}>
+      <div className={cx("text-[20px]", "font-black", "tracking-[0.25em]")}>CONTACT</div>
+
+      <div className={cx("grid", "grid-cols-3", "gap-[20px]")}>{children}</div>
+    </div>
   );
 }
 
