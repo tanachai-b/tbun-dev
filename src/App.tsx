@@ -1,31 +1,32 @@
 import cx from "classnames";
-import { useRef, useState } from "react";
+import { RefObject, useRef, useState } from "react";
 import { AboutPage, AppsPage, BackgroundGradient, Copyright, Navigation } from "./components";
 
 export default function App() {
-  const [page, setPage] = useState<"apps" | "about">("apps");
+  type Page = "apps" | "about";
+
+  const [page, setPage] = useState<Page>("apps");
+  const [visiblePage, setVisiblePage] = useState<Page | undefined>("apps");
 
   const stickyNotesRef = useRef<HTMLDivElement>(null);
   const colorSwatchesRef = useRef<HTMLDivElement>(null);
 
-  function onClickLogo() {
-    setPage("apps");
-    setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 0);
-  }
-
-  function onClickStickyNotes() {
-    setPage("apps");
-    setTimeout(() => stickyNotesRef.current?.scrollIntoView({ behavior: "smooth" }), 0);
-  }
-
-  function onClickColorSwatches() {
-    setPage("apps");
-    setTimeout(() => colorSwatchesRef.current?.scrollIntoView({ behavior: "smooth" }), 0);
-  }
-
-  function onClickAbout() {
-    setPage("about");
-    setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 0);
+  function navTo(toPage: Page, ref?: RefObject<HTMLDivElement>) {
+    setVisiblePage(undefined);
+    setTimeout(
+      () => {
+        setPage(toPage);
+        setTimeout(() => {
+          setVisiblePage(toPage);
+          if (ref != null) {
+            ref.current?.scrollIntoView({ behavior: "smooth" });
+          } else {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }
+        }, 0);
+      },
+      toPage === page ? 0 : 500,
+    );
   }
 
   return (
@@ -33,17 +34,21 @@ export default function App() {
       <BackgroundGradient />
 
       <Navigation
-        onClickLogo={onClickLogo}
-        onClickStickyNotes={onClickStickyNotes}
-        onClickColorSwatches={onClickColorSwatches}
-        onClickAbout={onClickAbout}
+        onClickLogo={() => navTo("apps")}
+        onClickStickyNotes={() => navTo("apps", stickyNotesRef)}
+        onClickColorSwatches={() => navTo("apps", colorSwatchesRef)}
+        onClickAbout={() => navTo("about")}
       />
 
       {page === "apps" && (
-        <AppsPage stickyNotesRef={stickyNotesRef} colorSwatchesRef={colorSwatchesRef} />
+        <AppsPage
+          isVisible={visiblePage === "apps"}
+          stickyNotesRef={stickyNotesRef}
+          colorSwatchesRef={colorSwatchesRef}
+        />
       )}
 
-      {page === "about" && <AboutPage />}
+      {page === "about" && <AboutPage isVisible={visiblePage === "about"} />}
 
       <Copyright />
     </div>

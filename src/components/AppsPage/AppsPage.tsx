@@ -4,14 +4,27 @@ import { color_swatches, sticky_notes } from "src/assets";
 import { AppSection, HomeSection } from "./components";
 
 export function AppsPage({
+  isVisible,
   stickyNotesRef,
   colorSwatchesRef,
 }: {
+  isVisible: boolean;
   stickyNotesRef: RefObject<HTMLDivElement>;
   colorSwatchesRef: RefObject<HTMLDivElement>;
 }) {
   return (
-    <>
+    <div
+      className={cx(
+        "flex-auto",
+
+        !isVisible ? "opacity-0" : "",
+        "transition-all",
+        "duration-[500ms]",
+
+        "flex",
+        "flex-col",
+      )}
+    >
       <HomeSection />
 
       <div className={cx("h-[50px]", "bg-[#202020]")} />
@@ -43,6 +56,6 @@ export function AppsPage({
         }
         href="http://color-swatches.tbun.dev"
       />
-    </>
+    </div>
   );
 }

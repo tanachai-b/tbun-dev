@@ -3,9 +3,20 @@ import { ReactNode, useState } from "react";
 import { email_logo, github_logo, linkedin_logo } from "src/assets";
 import { Resizable } from "src/common-components";
 
-export function AboutPage() {
+export function AboutPage({ isVisible }: { isVisible: boolean }) {
   return (
-    <>
+    <div
+      className={cx(
+        "flex-auto",
+
+        !isVisible ? "opacity-0" : "",
+        "transition-all",
+        "duration-[500ms]",
+
+        "flex",
+        "flex-col",
+      )}
+    >
       <HeaderSection />
 
       <InfoSection>
@@ -29,7 +40,7 @@ export function AboutPage() {
           <ContactButton src={email_logo} label="Email" href="mailto:tanachai.bun@gmail.com" />
         </Contact>
       </InfoSection>
-    </>
+    </div>
   );
 }
 
