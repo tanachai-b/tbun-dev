@@ -91,9 +91,18 @@ function ContactButton({ src, label, href }: { src: string; label: string; href:
   return (
     <a
       className={cx(
+        "rounded-[10px]",
+
+        "outline",
+        "outline-[0px]",
+        "outline-[#00000000]",
         "text-[black]",
-        "hover:text-[white]",
+
+        "hover:outline-[10px]",
+        "hover:outline-[#00000040]",
         "hover:bg-[black]",
+        "hover:text-[white]",
+
         "transition-all",
 
         "flex",
@@ -109,7 +118,7 @@ function ContactButton({ src, label, href }: { src: string; label: string; href:
       href={href}
     >
       <div
-        className={cx("flex-none", "bg-[currentcolor]", "size-[40px]")}
+        className={cx("bg-current", "size-[40px]")}
         style={{ mask: `url(${src})`, maskSize: "100%" }}
       />
 
