@@ -1,13 +1,17 @@
 import cx from "classnames";
-import { ReactNode, useEffect, useState } from "react";
-import { Resizable } from "src/common-components";
+import { ReactNode, useState } from "react";
+import { Intersectable, Resizable } from "src/common-components";
 
 export function HomeSection() {
+  const [isVisible, setIsVisible] = useState(false);
   const [width, setWidth] = useState(0);
 
   return (
-    <Container onResize={({ width }) => setWidth(width)}>
-      <ZoomOutEffect>
+    <Container
+      onIntersect={(ratio) => ratio > 0.2 && setIsVisible(true)}
+      onResize={({ width }) => setWidth(width)}
+    >
+      <ZoomOutEffect isVisible={isVisible}>
         <TBunLogo factor={width / 1920} />
       </ZoomOutEffect>
     </Container>
@@ -16,41 +20,46 @@ export function HomeSection() {
 
 function Container({
   children,
+  onIntersect,
   onResize,
 }: {
   children: ReactNode;
+  onIntersect: (ratio: number) => void;
   onResize: (boundingClientRect: DOMRect) => void;
 }) {
   return (
-    <Resizable
+    <Intersectable
       className={cx(
         "w-full",
         "h-[calc(100vh-100px)]",
-        "overflow-clip",
 
         "grid",
-        "place-items-center",
+
+        "overflow-clip",
       )}
-      onResize={onResize}
+      onIntersect={onIntersect}
     >
-      {children}
-    </Resizable>
+      <Resizable
+        className={cx(
+          "size-full",
+
+          "grid",
+          "place-items-center",
+        )}
+        onResize={onResize}
+      >
+        {children}
+      </Resizable>
+    </Intersectable>
   );
 }
 
-function ZoomOutEffect({ children }: { children: ReactNode }) {
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    setIsLoaded(false);
-    setTimeout(() => setIsLoaded(true), 0);
-  }, []);
-
+function ZoomOutEffect({ isVisible, children }: { isVisible: boolean; children: ReactNode }) {
   return (
     <div
       className={cx(
-        isLoaded ? "opacity-100" : "opacity-0",
-        isLoaded ? "scale-[100%]" : "scale-[1000%]",
+        isVisible ? "opacity-100" : "opacity-0",
+        isVisible ? "scale-[100%]" : "scale-[1000%]",
         "transition-all",
         "duration-[1s]",
       )}

@@ -1,12 +1,14 @@
 import cx from "classnames";
-import { RefObject, useRef, useState } from "react";
+import { RefObject, useEffect, useRef, useState } from "react";
 import { AboutPage, AppsPage, BackgroundGradient, Copyright, Navigation } from "./components";
 
 export default function App() {
   type Page = "apps" | "about";
 
   const [page, setPage] = useState<Page>("apps");
-  const [visiblePage, setVisiblePage] = useState<Page | undefined>("apps");
+  const [visiblePage, setVisiblePage] = useState<Page | undefined>();
+
+  useEffect(() => setVisiblePage("apps"), []);
 
   const stickyNotesRef = useRef<HTMLDivElement>(null);
   const colorSwatchesRef = useRef<HTMLDivElement>(null);
