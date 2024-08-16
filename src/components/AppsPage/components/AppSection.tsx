@@ -103,9 +103,7 @@ function SlideIn({ from, children }: { from: "left" | "right"; children: ReactNo
   return (
     <Intersectable
       className={cx("grid")}
-      onIntersect={(ratio) => {
-        if (ratio > 0.2) setIsVisible(true);
-      }}
+      onIntersect={(ratio) => ratio > 0.2 && setIsVisible(true)}
     >
       <div
         className={cx(

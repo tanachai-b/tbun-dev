@@ -5,18 +5,7 @@ import { Resizable } from "src/common-components";
 
 export function AboutPage({ isVisible }: { isVisible: boolean }) {
   return (
-    <div
-      className={cx(
-        "flex-auto",
-
-        !isVisible ? "opacity-0" : "",
-        "transition-all",
-        "duration-[500ms]",
-
-        "flex",
-        "flex-col",
-      )}
-    >
+    <Container isVisible={isVisible}>
       <HeaderSection />
 
       <InfoSection>
@@ -40,6 +29,25 @@ export function AboutPage({ isVisible }: { isVisible: boolean }) {
           <ContactButton src={email_logo} label="Email" href="mailto:tanachai.bun@gmail.com" />
         </Contact>
       </InfoSection>
+    </Container>
+  );
+}
+
+export function Container({ isVisible, children }: { isVisible: boolean; children: ReactNode }) {
+  return (
+    <div
+      className={cx(
+        "flex-auto",
+
+        !isVisible ? "opacity-0" : "",
+        "transition-all",
+        "duration-[500ms]",
+
+        "flex",
+        "flex-col",
+      )}
+    >
+      {children}
     </div>
   );
 }
@@ -109,10 +117,27 @@ function InfoSection({ children }: { children: ReactNode }) {
 
 function Contact({ children }: { children: ReactNode }) {
   return (
-    <div className={cx("flex", "flex-col", "items-center", "gap-[20px]")}>
+    <div
+      className={cx(
+        "flex",
+        "flex-col",
+        "items-center",
+
+        "gap-[20px]",
+      )}
+    >
       <div className={cx("text-[20px]", "font-black", "tracking-[0.25em]")}>CONTACT</div>
 
-      <div className={cx("grid", "grid-cols-3", "gap-[20px]")}>{children}</div>
+      <div
+        className={cx(
+          "grid",
+          "grid-cols-3",
+
+          "gap-[20px]",
+        )}
+      >
+        {children}
+      </div>
     </div>
   );
 }

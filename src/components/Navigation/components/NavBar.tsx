@@ -18,11 +18,10 @@ export function NavBar({ children }: { children: ReactNode }) {
 }
 
 function Container({ children }: { children: ReactNode }) {
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    setIsLoaded(false);
-    setTimeout(() => setIsLoaded(true), 0);
+    setTimeout(() => setIsVisible(true), 0);
   }, []);
 
   return (
@@ -35,7 +34,7 @@ function Container({ children }: { children: ReactNode }) {
         "h-[50px]",
         "overflow-clip",
 
-        !isLoaded ? "opacity-0" : "",
+        !isVisible ? "opacity-0" : "",
         "transition-all",
         "duration-[1s]",
       )}

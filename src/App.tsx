@@ -8,7 +8,9 @@ export default function App() {
   const [page, setPage] = useState<Page>("apps");
   const [visiblePage, setVisiblePage] = useState<Page | undefined>();
 
-  useEffect(() => setVisiblePage("apps"), []);
+  useEffect(() => {
+    setTimeout(() => setVisiblePage("apps"), 0);
+  }, []);
 
   const stickyNotesRef = useRef<HTMLDivElement>(null);
   const colorSwatchesRef = useRef<HTMLDivElement>(null);
