@@ -1,58 +1,35 @@
 import cx from "classnames";
-import { RefObject, useEffect, useRef, useState } from "react";
-import { AboutPage, AppsPage, BackgroundGradient, Copyright, Navigation } from "./components";
+import { useRef } from "react";
+import { Copyright } from "./common-components";
+import { AboutPage, AppsPage, BackgroundGradient, Navigation } from "./components";
+import { useNavigation } from "./hooks";
 
 export default function App() {
-  type Page = "apps" | "about";
-
-  const [page, setPage] = useState<Page>("apps");
-  const [visiblePage, setVisiblePage] = useState<Page | undefined>();
-
-  useEffect(() => {
-    setTimeout(() => setVisiblePage("apps"), 0);
-  }, []);
-
   const stickyNotesRef = useRef<HTMLDivElement>(null);
   const colorSwatchesRef = useRef<HTMLDivElement>(null);
 
-  function navTo(toPage: Page, ref?: RefObject<HTMLDivElement>) {
-    setVisiblePage(undefined);
-    setTimeout(
-      () => {
-        setPage(toPage);
-        setTimeout(() => {
-          setVisiblePage(toPage);
-          if (ref != null) {
-            ref.current?.scrollIntoView({ behavior: "smooth" });
-          } else {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          }
-        }, 0);
-      },
-      toPage === page ? 0 : 500,
-    );
-  }
+  const { page, isPageVisible, navigateTo } = useNavigation();
 
   return (
     <div className={cx("min-h-full", "flex", "flex-col")}>
       <BackgroundGradient />
 
       <Navigation
-        onClickLogo={() => navTo("apps")}
-        onClickStickyNotes={() => navTo("apps", stickyNotesRef)}
-        onClickColorSwatches={() => navTo("apps", colorSwatchesRef)}
-        onClickAbout={() => navTo("about")}
+        onClickLogo={() => navigateTo("apps")}
+        onClickStickyNotes={() => navigateTo("apps", stickyNotesRef)}
+        onClickColorSwatches={() => navigateTo("apps", colorSwatchesRef)}
+        onClickAbout={() => navigateTo("about")}
       />
 
       {page === "apps" && (
         <AppsPage
-          isVisible={visiblePage === "apps"}
+          isVisible={isPageVisible}
           stickyNotesRef={stickyNotesRef}
           colorSwatchesRef={colorSwatchesRef}
         />
       )}
 
-      {page === "about" && <AboutPage isVisible={visiblePage === "about"} />}
+      {page === "about" && <AboutPage isVisible={isPageVisible} />}
 
       <Copyright />
     </div>

@@ -58,12 +58,42 @@ function Container({
         "bg-[white]",
         "overflow-clip",
 
-        size.width > size.height ? ["grid", "grid-cols-2"] : ["grid", "grid-rows-2"],
+        "grid",
+        "auto-cols-fr",
+        size.width > size.height ? "grid-flow-col" : "grid-flow-row",
       )}
       onResize={({ width, height }) => setSize({ width, height })}
     >
       {children}
     </Resizable>
+  );
+}
+
+function SlideIn({ from, children }: { from: "left" | "right"; children: ReactNode }) {
+  const [isVisible, setIsVisible] = useState(false);
+
+  return (
+    <Intersectable
+      className={cx("grid")}
+      onIntersect={(ratio) => ratio > 0.2 && setIsVisible(true)}
+    >
+      <div
+        className={cx(
+          "relative",
+
+          !isVisible
+            ? from === "left"
+              ? ["left-[-200px]", "opacity-0"]
+              : ["left-[200px]", "opacity-0"]
+            : ["left-0", "opacity-100"],
+
+          "transition-all",
+          "duration-[500ms]",
+        )}
+      >
+        {children}
+      </div>
+    </Intersectable>
   );
 }
 
@@ -94,33 +124,5 @@ function Detail({ children }: { children: ReactNode }) {
         </Fragment>
       ))}
     </div>
-  );
-}
-
-function SlideIn({ from, children }: { from: "left" | "right"; children: ReactNode }) {
-  const [isVisible, setIsVisible] = useState(false);
-
-  return (
-    <Intersectable
-      className={cx("grid")}
-      onIntersect={(ratio) => ratio > 0.2 && setIsVisible(true)}
-    >
-      <div
-        className={cx(
-          "relative",
-
-          !isVisible
-            ? from === "left"
-              ? ["left-[-200px]", "opacity-0"]
-              : ["left-[200px]", "opacity-0"]
-            : ["left-0", "opacity-100"],
-
-          "transition-all",
-          "duration-[500ms]",
-        )}
-      >
-        {children}
-      </div>
-    </Intersectable>
   );
 }
