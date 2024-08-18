@@ -30,7 +30,7 @@ export function AppSection({
 
           <div className={cx("text-[20px]")}>{description}</div>
 
-          <LinkButton className={cx("w-[150px]")} href={href}>
+          <LinkButton className={cx("w-[150px]")} href={href} target="_blank">
             OPEN
           </LinkButton>
         </Detail>

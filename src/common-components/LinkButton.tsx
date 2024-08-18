@@ -1,15 +1,19 @@
 import cx from "classnames";
-import { ReactNode } from "react";
+import { HTMLAttributeAnchorTarget, MouseEventHandler, ReactNode } from "react";
 import { Icon } from "src/common-components";
 
 export function LinkButton({
   className,
   href,
+  target,
   children,
+  onClick,
 }: {
   className?: string;
-  href: string;
+  href?: string;
+  target?: HTMLAttributeAnchorTarget;
   children: ReactNode;
+  onClick?: MouseEventHandler<HTMLAnchorElement>;
 }) {
   return (
     <a
@@ -20,6 +24,7 @@ export function LinkButton({
         "outline",
         "outline-[#00000000]",
         "outline-[0px]",
+
         "hover:outline-[#00000040]",
         "hover:outline-[10px]",
         "transition-all",
@@ -37,9 +42,13 @@ export function LinkButton({
 
         "group",
 
+        "cursor-pointer",
+
         className,
       )}
       href={href}
+      target={target}
+      onClick={onClick}
     >
       <div className={cx("text-[15px]")}>{children}</div>
 
