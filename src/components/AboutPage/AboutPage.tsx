@@ -7,11 +7,18 @@ import {
   Copyright,
   Header,
   Highlight,
+  LinkButton,
   Section,
 } from "src/common-components";
 import { HeaderSection, InfoSection, SlideIn } from "./components";
 
-export function AboutPage({ isVisible }: { isVisible: boolean }) {
+export function AboutPage({
+  isVisible,
+  onClickViewResume,
+}: {
+  isVisible: boolean;
+  onClickViewResume: () => void;
+}) {
   return (
     <Container isVisible={isVisible}>
       <HeaderSection />
@@ -42,6 +49,10 @@ export function AboutPage({ isVisible }: { isVisible: boolean }) {
               <ContactButton src={email_logo} label="Email" href="mailto:tanachai.bun@gmail.com" />
             </ContactButtons>
           </Section>
+        </SlideIn>
+
+        <SlideIn className={cx("w-full", "max-w-[300px]", "self-center")} delay={900}>
+          <LinkButton onClick={onClickViewResume}>VIEW RESUMÉ</LinkButton>
         </SlideIn>
       </InfoSection>
 

@@ -116,8 +116,8 @@ function Detail({ children }: { children: ReactNode }) {
     >
       <div className={cx("flex-auto", "max-h-[30px]")} />
 
-      {childrenArray.map((child, i) => (
-        <Fragment key={i}>
+      {childrenArray.map((child, index) => (
+        <Fragment key={index}>
           {child}
 
           <div className={cx("flex-auto", "max-h-[30px]")} />

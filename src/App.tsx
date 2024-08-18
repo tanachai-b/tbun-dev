@@ -1,6 +1,6 @@
 import cx from "classnames";
 import { useRef } from "react";
-import { AboutPage, AppsPage, BackgroundGradient, Navigation } from "./components";
+import { AboutPage, AppsPage, BackgroundGradient, Navigation, ResumePage } from "./components";
 import { useNavigation } from "./hooks";
 
 export default function App() {
@@ -28,7 +28,11 @@ export default function App() {
         />
       )}
 
-      {page === "about" && <AboutPage isVisible={isPageVisible} />}
+      {page === "about" && (
+        <AboutPage isVisible={isPageVisible} onClickViewResume={() => navigateTo("resume")} />
+      )}
+
+      {page === "resume" && <ResumePage isVisible={isPageVisible} />}
     </div>
   );
 }
