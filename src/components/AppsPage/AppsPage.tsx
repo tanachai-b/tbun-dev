@@ -1,6 +1,7 @@
 import cx from "classnames";
 import { ReactNode, RefObject } from "react";
 import { color_swatches, sticky_notes } from "src/assets";
+import { Copyright } from "src/common-components";
 import { AppSection, HomeSection } from "./components";
 
 export function AppsPage({
@@ -45,6 +46,8 @@ export function AppsPage({
         }
         href="http://color-swatches.tbun.dev"
       />
+
+      <Copyright />
     </Container>
   );
 }

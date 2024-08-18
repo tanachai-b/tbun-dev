@@ -1,6 +1,5 @@
 import cx from "classnames";
 import { useRef } from "react";
-import { Copyright } from "./common-components";
 import { AboutPage, AppsPage, BackgroundGradient, Navigation } from "./components";
 import { useNavigation } from "./hooks";
 
@@ -30,8 +29,6 @@ export default function App() {
       )}
 
       {page === "about" && <AboutPage isVisible={isPageVisible} />}
-
-      <Copyright />
     </div>
   );
 }

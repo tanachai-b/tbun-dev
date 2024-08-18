@@ -1,7 +1,14 @@
 import cx from "classnames";
 import { ReactNode } from "react";
 import { email_logo, github_logo, linkedin_logo } from "src/assets";
-import { ContactButton, ContactButtons, Header, Highlight, Section } from "src/common-components";
+import {
+  ContactButton,
+  ContactButtons,
+  Copyright,
+  Header,
+  Highlight,
+  Section,
+} from "src/common-components";
 import { HeaderSection, InfoSection, SlideIn } from "./components";
 
 export function AboutPage({ isVisible }: { isVisible: boolean }) {
@@ -37,6 +44,8 @@ export function AboutPage({ isVisible }: { isVisible: boolean }) {
           </Section>
         </SlideIn>
       </InfoSection>
+
+      <Copyright />
     </Container>
   );
 }
