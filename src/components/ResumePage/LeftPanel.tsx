@@ -56,15 +56,9 @@ function Container({ children }: { children: ReactNode }) {
   return (
     <div
       className={cx(
-        "flex-none",
-
-        "w-full",
-        "max-w-[500px]",
-
         "bg-[#f0f0f0]",
 
-        "flex",
-        "flex-col",
+        "columns-[250px]",
 
         "p-[30px]",
         "gap-[30px]",
@@ -73,7 +67,16 @@ function Container({ children }: { children: ReactNode }) {
         "text-justify",
       )}
     >
-      {children}
+      <div
+        className={cx(
+          "flex",
+          "flex-col",
+
+          "gap-[30px]",
+        )}
+      >
+        {children}
+      </div>
     </div>
   );
 }

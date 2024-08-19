@@ -1,20 +1,32 @@
 import cx from "classnames";
-import { ReactNode } from "react";
-import { Copyright } from "src/common-components";
+import { ReactNode, useState } from "react";
+import { Copyright, Resizable } from "src/common-components";
 import { HeaderSection } from "../AboutPage/components";
 import { LeftPanel } from "./LeftPanel";
 import { RightPanel } from "./RightPanel";
 
 export function ResumePage({ isVisible }: { isVisible: boolean }) {
+  const [isNarrow, setIsNarrow] = useState(false);
+
   return (
     <Container isVisible={isVisible}>
       <HeaderSection />
 
-      <div className={cx("flex-auto", "flex", "flex-row")}>
+      <Resizable
+        className={cx(
+          "flex-auto",
+
+          "flex",
+          !isNarrow
+            ? ["grid", "grid-flow-col", "auto-cols-[400px_auto]"]
+            : ["grid", "grid-flow-row"],
+        )}
+        onResize={({ width }) => setIsNarrow(width < 800)}
+      >
         <LeftPanel />
 
         <RightPanel />
-      </div>
+      </Resizable>
 
       <Copyright />
     </Container>

@@ -8,6 +8,7 @@ export function TimelineEntry({
   company,
   duration,
   skills,
+  continueToNext = false,
 }: {
   color: string;
   endYear: number;
@@ -16,22 +17,39 @@ export function TimelineEntry({
   company: string;
   duration: string;
   skills: string[];
+  continueToNext?: boolean;
 }) {
+  const rowCount = endYear - startYear + 1;
+
   return (
-    <div className={cx("flex", "flex-row")}>
-      <div className={cx("flex-none", "flex", "flex-col")}>
-        {Array.from(Array(endYear - startYear + 1)).map((_, index) => (
+    <div
+      className={cx(
+        "flex",
+        "flex-row",
+        "gap-[10px]",
+
+        !continueToNext ? "pb-[10px]" : "",
+      )}
+    >
+      <div
+        className={cx(
+          "flex-none",
+
+          "w-[4ch]",
+
+          "grid",
+          "grid-flow-row",
+          "auto-rows-[minmax(80px,_1fr)]",
+        )}
+      >
+        {Array.from(Array(rowCount)).map((_, index) => (
           <div
             className={cx(
-              "h-[100px]",
-              "w-[4ch]",
-              "box-content",
-
               "text-center",
+              "text-[#00000080]",
 
               "break-inside-avoid",
             )}
-            style={{ color }}
           >
             {endYear - index}
           </div>
@@ -42,33 +60,21 @@ export function TimelineEntry({
         className={cx(
           "flex-none",
 
-          "w-[30px]",
-
-          "grid",
-          "place-items-center",
-
-          "pb-[20px]",
+          "w-[2px]",
         )}
-      >
-        <div
-          className={cx(
-            "w-[5px]",
-            "h-full",
-
-            "rounded-full",
-          )}
-          style={{ backgroundColor: color }}
-        />
-      </div>
+        style={{ backgroundColor: color }}
+      />
 
       <div
         className={cx(
           "flex-auto",
 
-          "h-[100px]",
+          "h-fit",
 
           "flex",
           "flex-col",
+
+          continueToNext ? "pb-[10px]" : "",
 
           "break-inside-avoid",
         )}
@@ -77,9 +83,8 @@ export function TimelineEntry({
 
         <div>
           <span className={cx("font-black")}>{role}</span>
-          <span className={cx("ml-[10px]", "text-[#00000080]", "whitespace-nowrap")}>
-            {duration}
-          </span>
+          {" "}
+          <span className={cx("text-[#00000080]", "whitespace-nowrap")}>{duration}</span>
         </div>
 
         <div
@@ -88,14 +93,11 @@ export function TimelineEntry({
             "flex-row",
             "flex-wrap",
 
-            "mt-[5px]",
+            "pt-[2px]",
             "gap-x-[7px]",
-            "gap-y-[5px]",
 
             "text-[11px]",
-            "text-[#00000080]",
-            "font-bold",
-            "leading-none",
+            "text-[#000000a0]",
           )}
         >
           {skills.map((skill) => (
