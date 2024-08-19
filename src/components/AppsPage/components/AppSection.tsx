@@ -59,8 +59,9 @@ function Container({
         "overflow-clip",
 
         "grid",
-        "auto-cols-fr",
-        size.width > size.height ? "grid-flow-col" : "grid-flow-row",
+        size.width > size.height
+          ? ["grid-flow-col", "auto-cols-fr"]
+          : ["grid-flow-row", "auto-rows-fr"],
       )}
       onResize={({ width, height }) => setSize({ width, height })}
     >
