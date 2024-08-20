@@ -6,6 +6,8 @@ type Page = (typeof pages)[number];
 export function useNavigation() {
   const initialPage = getPageFromPath();
 
+  window.addEventListener("popstate", () => setPage(getPageFromPath()));
+
   const [page, setPage] = useState<Page>(initialPage);
   const [isPageVisible, setIsPageVisible] = useState(false);
 
