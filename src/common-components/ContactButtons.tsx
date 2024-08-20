@@ -46,7 +46,7 @@ export function ContactButton({ src, label, href }: { src: string; label: string
         "gap-[10px]",
 
         "text-[15px]",
-        "font-bold",
+        "font-medium",
       )}
       href={href}
       target="_blank"

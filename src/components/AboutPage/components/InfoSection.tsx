@@ -17,16 +17,16 @@ export function InfoSection({ children }: { children: ReactNode }) {
     >
       <div
         className={cx(
-          "w-[500px]",
+          "w-[400px]",
 
           "flex",
           "flex-col",
 
           "p-[20px]",
-          "pt-[50px]",
-          "gap-[50px]",
+          "pt-[30px]",
+          "gap-[30px]",
 
-          "text-[17px]",
+          "text-[15px]",
           "text-justify",
         )}
       >
