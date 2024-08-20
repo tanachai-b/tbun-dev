@@ -6,27 +6,15 @@ import { LeftPanel } from "./LeftPanel";
 import { RightPanel } from "./RightPanel";
 
 export function ResumePage({ isVisible }: { isVisible: boolean }) {
-  const [isNarrow, setIsNarrow] = useState(false);
-
   return (
     <Container isVisible={isVisible}>
       <HeaderSection />
 
-      <Resizable
-        className={cx(
-          "flex-auto",
-
-          "flex",
-          !isNarrow
-            ? ["grid", "grid-flow-col", "auto-cols-[400px_auto]"]
-            : ["grid", "grid-flow-row"],
-        )}
-        onResize={({ width }) => setIsNarrow(width < 800)}
-      >
+      <Responsive>
         <LeftPanel />
 
         <RightPanel />
-      </Resizable>
+      </Responsive>
 
       <Copyright />
     </Container>
@@ -51,5 +39,23 @@ function Container({ isVisible, children }: { isVisible: boolean; children: Reac
     >
       {children}
     </div>
+  );
+}
+
+export function Responsive({ children }: { children: ReactNode }) {
+  const [isNarrow, setIsNarrow] = useState(false);
+
+  return (
+    <Resizable
+      className={cx(
+        "flex-auto",
+
+        "grid",
+        !isNarrow ? ["grid-flow-col", "auto-cols-[400px_auto]"] : ["grid-flow-row"],
+      )}
+      onResize={({ width }) => setIsNarrow(width < 800)}
+    >
+      {children}
+    </Resizable>
   );
 }

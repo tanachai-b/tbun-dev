@@ -50,8 +50,8 @@ const careerEntries = (
       endYear={2024}
       startYear={2023}
       color="#0000ff"
-      role="Front-end Developer"
       company="London Stock Exchange Group"
+      role="Front-end Developer"
       duration="2 years"
       skills={[
         "React",
@@ -70,8 +70,8 @@ const careerEntries = (
       endYear={2022}
       startYear={2022}
       color="#ff6000"
-      role="Full-stack Developer"
       company="Dishes"
+      role="Full-stack Developer"
       duration="1 year"
       skills={["Flutter", "Dart", "Firebase", "NoSQL", "React", "JavaScript", "Figma", "UX/UI"]}
     />
@@ -80,8 +80,8 @@ const careerEntries = (
       endYear={2021}
       startYear={2019}
       color="#8000ff"
-      role="Salesforce Developer"
       company="Accenture"
+      role="Salesforce Developer"
       duration="3 years"
       skills={[
         "Salesforce",
@@ -100,8 +100,8 @@ const careerEntries = (
       endYear={2018}
       startYear={2018}
       color="#8000ff"
-      role="Back-end Developer"
       company="Accenture"
+      role="Back-end Developer"
       duration="1 year"
       skills={[
         "JavaScript",
@@ -123,8 +123,8 @@ const careerEntries = (
       endYear={2017}
       startYear={2017}
       color="#8000ff"
-      role="SAP ABAP Developer"
       company="Accenture"
+      role="SAP ABAP Developer"
       duration="1 year"
       skills={[
         "SAP",
@@ -142,8 +142,8 @@ const careerEntries = (
       endYear={2016}
       startYear={2015}
       color="#8000ff"
-      role="SAP Business Intelligence Developer"
       company="Accenture"
+      role="SAP Business Intelligence Developer"
       duration="2 years"
       skills={[
         "SAP",
@@ -162,8 +162,8 @@ const careerEntries = (
       endYear={2014}
       startYear={2013}
       color="#8000ff"
-      role="SAP Developer"
       company="Accenture"
+      role="SAP Developer"
       duration="1 year"
       skills={[
         "SAP",
@@ -181,8 +181,8 @@ const careerEntries = (
       endYear={2012}
       startYear={2012}
       color="#40a0ff"
-      role="Software Developer Intern"
       company="Krungthai Computer Services"
+      role="Software Developer Intern"
       duration="2 months"
       skills={["C#", "Background Service", "Network", "Encryption", "Banking"]}
     />
@@ -195,8 +195,8 @@ const educationEntries = (
       endYear={2013}
       startYear={2013}
       color="#ff40a0"
-      role="Computer Engineering Bachelor’s Degree"
       company="Chulalongkorn University"
+      role="Computer Engineering Bachelor’s Degree"
       duration="4 years"
       skills={[
         "Java",
