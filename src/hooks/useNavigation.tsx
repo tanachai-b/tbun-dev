@@ -11,21 +11,29 @@ export function useNavigation() {
   }, []);
 
   function navigateTo(toPage: Page, ref?: RefObject<HTMLDivElement>) {
-    setIsPageVisible(false);
-    setTimeout(
-      () => {
+    if (toPage === page) {
+      if (ref != null) {
+        ref.current?.scrollIntoView({ behavior: "smooth" });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    } else {
+      setIsPageVisible(false);
+
+      setTimeout(() => {
         setPage(toPage);
+
         setTimeout(() => {
-          setIsPageVisible(true);
           if (ref != null) {
-            ref.current?.scrollIntoView({ behavior: "smooth" });
+            ref.current?.scrollIntoView();
           } else {
-            window.scrollTo({ top: 0, behavior: "smooth" });
+            window.scrollTo({ top: 0 });
           }
+
+          setIsPageVisible(true);
         }, 0);
-      },
-      toPage === page ? 0 : 500,
-    );
+      }, 500);
+    }
   }
 
   return { page, isPageVisible, navigateTo };

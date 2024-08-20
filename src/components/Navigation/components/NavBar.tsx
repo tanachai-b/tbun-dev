@@ -93,6 +93,8 @@ function ForegroundShadow({ isVisible }: { isVisible: boolean }) {
 
         "h-[100vh]",
         isVisible ? "shadow-[0_10px_20px_0_#000000]" : "",
+        "transition-all",
+        "duration-[1s]",
       )}
     />
   );
