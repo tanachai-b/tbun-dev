@@ -9,8 +9,9 @@ import {
   Highlight,
   LinkButton,
   Section,
+  SlideIn,
 } from "src/common-components";
-import { HeaderSection, InfoSection, SlideIn } from "./components";
+import { HeaderSection, InfoSection } from "./components";
 
 export function AboutPage({
   isVisible,
@@ -24,12 +25,12 @@ export function AboutPage({
       <HeaderSection />
 
       <InfoSection>
-        <SlideIn delay={500}>
+        <SlideIn>
           <Highlight>Hi, I’m a senior software engineer based in Bangkok, Thailand. </Highlight>I am
           a full-stack developer. I develop web applications, front-end and back-end.
         </SlideIn>
 
-        <SlideIn delay={700}>
+        <SlideIn>
           <Section>
             <Header>CONTACT</Header>
 
@@ -51,7 +52,7 @@ export function AboutPage({
           </Section>
         </SlideIn>
 
-        <SlideIn className={cx("w-full", "max-w-[300px]", "self-center")} delay={900}>
+        <SlideIn className={cx("w-full", "max-w-[300px]", "self-center")}>
           <LinkButton onClick={onClickViewResume}>VIEW RESUMÉ</LinkButton>
         </SlideIn>
       </InfoSection>

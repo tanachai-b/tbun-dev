@@ -1,18 +1,22 @@
 import cx from "classnames";
 import { ReactNode } from "react";
-import { Header } from "src/common-components";
+import { Header, SlideIn } from "src/common-components";
 import { TimelineEntry } from "./TimelineEntry";
 
 export function RightPanel() {
   return (
     <Container>
-      <Header>CAREER</Header>
+      <SlideIn>
+        <Header>CAREER</Header>
+      </SlideIn>
 
       <MultiColumns>
         <div className={cx("flex", "flex-col")}>{careerEntries}</div>
       </MultiColumns>
 
-      <Header>EDUCATION</Header>
+      <SlideIn>
+        <Header>EDUCATION</Header>
+      </SlideIn>
 
       <MultiColumns>{educationEntries}</MultiColumns>
     </Container>

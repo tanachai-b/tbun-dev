@@ -1,18 +1,30 @@
 import cx from "classnames";
-import { ReactNode, useState } from "react";
+import { ReactNode, RefObject, useEffect, useRef, useState } from "react";
 import { Intersectable } from "src/common-components";
 
 export function SlideIn({
   className,
-  delay: initDelay,
+  customRef,
   children,
 }: {
   className?: string;
-  delay: number;
+  customRef?: RefObject<HTMLDivElement>;
   children: ReactNode;
 }) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const component = customRef?.current ?? ref.current;
+    if (component == null) return;
+
+    const { top = 0, left = 0 } = component.getBoundingClientRect();
+    const delay = left * Math.cos(Math.PI / 4) + top * Math.sin(Math.PI / 4);
+
+    setDelay(delay);
+  }, []);
+
   const [isVisible, setIsVisible] = useState(false);
-  const [delay, setDelay] = useState(initDelay);
+  const [delay, setDelay] = useState(0);
 
   return (
     <Intersectable
@@ -29,9 +41,11 @@ export function SlideIn({
       onIntersect={(ratio) => {
         ratio <= 0.2 && setDelay(0);
         ratio > 0.2 && setIsVisible(true);
+
+        setTimeout(() => setDelay(0), delay);
       }}
     >
-      {children}
+      <div ref={ref}>{children}</div>
     </Intersectable>
   );
 }

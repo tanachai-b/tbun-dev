@@ -1,5 +1,6 @@
 import cx from "classnames";
-import { ReactNode } from "react";
+import { ReactNode, RefObject, useRef } from "react";
+import { SlideIn } from "src/common-components";
 
 export function TimelineEntry({
   endYear,
@@ -20,32 +21,43 @@ export function TimelineEntry({
   skills: string[];
   continueToNext?: boolean;
 }) {
+  const ref = useRef(null);
+
   return (
-    <div className={cx("flex", "flex-row", "gap-[10px]")}>
-      <Years endYear={endYear} startYear={startYear} continueToNext={continueToNext} />
+    <SlideIn customRef={ref}>
+      <div className={cx("flex", "flex-row", "gap-[10px]")}>
+        <Years
+          firstYearRef={ref}
+          endYear={endYear}
+          startYear={startYear}
+          continueToNext={continueToNext}
+        />
 
-      <Line color={color} continueToNext={continueToNext} />
+        <Line color={color} continueToNext={continueToNext} />
 
-      <Texts>
-        <div style={{ color }}>{company}</div>
+        <Texts>
+          <div style={{ color }}>{company}</div>
 
-        <div>
-          <span className={cx("font-black")}>{role}</span>
-          {" "}
-          <span className={cx("text-[#00000080]", "whitespace-nowrap")}>{duration}</span>
-        </div>
+          <div>
+            <span className={cx("font-black")}>{role}</span>
+            {" "}
+            <span className={cx("text-[#00000080]", "whitespace-nowrap")}>{duration}</span>
+          </div>
 
-        <Skills skills={skills} />
-      </Texts>
-    </div>
+          <Skills skills={skills} />
+        </Texts>
+      </div>
+    </SlideIn>
   );
 }
 
 function Years({
+  firstYearRef,
   endYear,
   startYear,
   continueToNext = false,
 }: {
+  firstYearRef: RefObject<HTMLDivElement>;
   endYear: number;
   startYear: number;
   continueToNext?: boolean;
@@ -70,7 +82,11 @@ function Years({
       )}
     >
       {Array.from(Array(rowCount)).map((_, index) => (
-        <div key={index} className={cx("break-inside-avoid")}>
+        <div
+          ref={index === 0 ? firstYearRef : undefined}
+          key={index}
+          className={cx("break-inside-avoid")}
+        >
           {endYear - index}
         </div>
       ))}
