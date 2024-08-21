@@ -18,41 +18,59 @@ body {
   height: 100%;
 }
 
-@layer utilities {
-  @media (pointer: fine) {
-    /* width */
-    ::-webkit-scrollbar {
-      width: 7px;
-      height: 7px;
-    }
+@media (pointer: fine) {
+  ::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
 
-    /* Track */
-    ::-webkit-scrollbar-track {
+  *,
+  .light-scrollbar {
+    &::-webkit-scrollbar-track {
       background: #00000000;
     }
 
-    ::-webkit-scrollbar-corner {
+    &::-webkit-scrollbar-corner {
       background: #00000000;
     }
 
-    /* Handle */
-    ::-webkit-scrollbar-thumb {
-      background: #ffffff40;
+    &::-webkit-scrollbar-thumb {
+      background: #ffffff20;
       border-radius: 999px;
     }
 
-    /* Handle on hover */
-    ::-webkit-scrollbar-thumb:hover {
-      background: #ffffff60;
+    &::-webkit-scrollbar-thumb:hover {
+      background: #ffffff40;
+    }
+  }
+
+  .dark-scrollbar {
+    &::-webkit-scrollbar-track {
+      background: #ffffff00;
     }
 
+    &::-webkit-scrollbar-corner {
+      background: #ffffff00;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #00000020;
+      border-radius: 999px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #00000040;
+    }
+  }
+
+  .hide-scrollbar {
     /* Hide scrollbar for Chrome, Safari and Opera */
-    .hide-scrollbar::-webkit-scrollbar {
+    & ::-webkit-scrollbar {
       display: none;
     }
 
     /* Hide scrollbar for IE, Edge and Firefox */
-    .hide-scrollbar {
+    & {
       -ms-overflow-style: none; /* IE and Edge */
       scrollbar-width: none; /* Firefox */
     }
