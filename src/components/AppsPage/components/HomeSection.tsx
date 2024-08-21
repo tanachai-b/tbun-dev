@@ -11,9 +11,9 @@ export function HomeSection() {
       onIntersect={(ratio) => ratio > 0.2 && setIsVisible(true)}
       onResize={({ width }) => setWidth(width)}
     >
-      <ZoomOutEffect isVisible={isVisible}>
+      <ZoomEffect isVisible={isVisible}>
         <TBunLogo factor={width / 1920} />
-      </ZoomOutEffect>
+      </ZoomEffect>
     </Container>
   );
 }
@@ -28,23 +28,15 @@ function Container({
   onResize: (boundingClientRect: DOMRect) => void;
 }) {
   return (
-    <Intersectable
-      className={cx(
-        "w-full",
-        "h-[calc(100vh-100px)]",
-
-        "grid",
-
-        "overflow-clip",
-      )}
-      onIntersect={onIntersect}
-    >
+    <Intersectable className={cx("h-[calc(100vh-100px)]")} onIntersect={onIntersect}>
       <Resizable
         className={cx(
           "size-full",
 
           "grid",
           "place-items-center",
+
+          "overflow-clip",
         )}
         onResize={onResize}
       >
@@ -54,12 +46,11 @@ function Container({
   );
 }
 
-function ZoomOutEffect({ isVisible, children }: { isVisible: boolean; children: ReactNode }) {
+function ZoomEffect({ isVisible, children }: { isVisible: boolean; children: ReactNode }) {
   return (
     <div
       className={cx(
-        isVisible ? "opacity-100" : "opacity-0",
-        isVisible ? "scale-[100%]" : "scale-[1000%]",
+        !isVisible ? ["scale-[1000%]", "opacity-0"] : "",
         "transition-all",
         "duration-[1s]",
       )}

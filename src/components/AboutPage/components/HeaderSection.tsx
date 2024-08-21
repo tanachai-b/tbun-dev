@@ -1,5 +1,5 @@
 import cx from "classnames";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { Intersectable, Resizable } from "src/common-components";
 
 export function HeaderSection() {
@@ -7,10 +7,28 @@ export function HeaderSection() {
   const [width, setWidth] = useState(0);
 
   return (
-    <Intersectable
-      className={cx("h-[50vh]", "overflow-clip")}
+    <Container
       onIntersect={(ratio) => ratio > 0.2 && setIsVisible(true)}
+      onResize={({ width }) => setWidth(width / 1920)}
     >
+      <ZoomEffect isVisible={isVisible}>
+        <FullName factor={width} />
+      </ZoomEffect>
+    </Container>
+  );
+}
+
+function Container({
+  onIntersect,
+  onResize,
+  children,
+}: {
+  onIntersect: (ratio: number) => void;
+  onResize: (boundingClientRect: DOMRect) => void;
+  children: ReactNode;
+}) {
+  return (
+    <Intersectable className={cx("h-[50vh]")} onIntersect={onIntersect}>
       <Resizable
         className={cx(
           "size-full",
@@ -20,26 +38,38 @@ export function HeaderSection() {
 
           "overflow-clip",
         )}
-        onResize={({ width }) => setWidth(width)}
+        onResize={onResize}
       >
-        <div
-          className={cx(
-            !isVisible ? ["scale-[1000%]", "opacity-0"] : "",
-            "transition-all",
-            "duration-[1000ms]",
-          )}
-        >
-          <div
-            className={cx("text-center")}
-            style={{
-              fontSize: `${Math.min(200 * (width / 1920), 50)}px`,
-              letterSpacing: `${0.5 * (width / 1920)}em`,
-            }}
-          >
-            <span className={cx("font-black")}>TANACHAI</span> <span>BUNLUTANGTUM</span>
-          </div>
-        </div>
+        {children}
       </Resizable>
     </Intersectable>
+  );
+}
+
+function ZoomEffect({ isVisible, children }: { isVisible: boolean; children: ReactNode }) {
+  return (
+    <div
+      className={cx(
+        !isVisible ? ["scale-[1000%]", "opacity-0"] : "",
+        "transition-all",
+        "duration-[1s]",
+      )}
+    >
+      {children}
+    </div>
+  );
+}
+
+function FullName({ factor }: { factor: number }) {
+  return (
+    <div
+      className={cx("text-center")}
+      style={{
+        fontSize: `${Math.min(200 * factor, 50)}px`,
+        letterSpacing: `${0.5 * factor}em`,
+      }}
+    >
+      <span className={cx("font-black")}>TANACHAI</span> <span>BUNLUTANGTUM</span>
+    </div>
   );
 }

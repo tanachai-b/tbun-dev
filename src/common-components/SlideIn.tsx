@@ -18,9 +18,9 @@ export function SlideIn({
     if (component == null) return;
 
     const { top = 0, left = 0 } = component.getBoundingClientRect();
-    const delay = left * Math.cos(Math.PI / 4) + top * Math.sin(Math.PI / 4);
+    const diagonal = left * Math.cos(Math.PI / 4) + top * Math.sin(Math.PI / 4);
 
-    setDelay(delay);
+    setDelay(diagonal);
   }, []);
 
   const [isVisible, setIsVisible] = useState(false);

@@ -52,7 +52,6 @@ function Container({
     <Resizable
       divRef={divRef}
       className={cx(
-        "w-full",
         "h-[calc(100vh-100px)]",
 
         "bg-[white]",
