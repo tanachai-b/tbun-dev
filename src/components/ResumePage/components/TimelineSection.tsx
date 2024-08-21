@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import { Header, SlideIn } from "src/common-components";
 import { TimelineEntry } from "./TimelineEntry";
 
-export function RightPanel() {
+export function TimelineSection() {
   return (
     <Container>
       <SlideIn>

@@ -2,19 +2,18 @@ import cx from "classnames";
 import { ReactNode, useState } from "react";
 import { Copyright, Resizable } from "src/common-components";
 import { HeaderSection } from "../AboutPage/components";
-import { LeftPanel } from "./LeftPanel";
-import { RightPanel } from "./RightPanel";
+import { DetailSection, TimelineSection } from "./components";
 
 export function ResumePage({ isVisible }: { isVisible: boolean }) {
   return (
     <Container isVisible={isVisible}>
       <HeaderSection />
 
-      <Responsive>
-        <LeftPanel />
+      <ResponsiveBody>
+        <DetailSection />
 
-        <RightPanel />
-      </Responsive>
+        <TimelineSection />
+      </ResponsiveBody>
 
       <Copyright />
     </Container>
@@ -42,7 +41,7 @@ function Container({ isVisible, children }: { isVisible: boolean; children: Reac
   );
 }
 
-export function Responsive({ children }: { children: ReactNode }) {
+function ResponsiveBody({ children }: { children: ReactNode }) {
   const [isNarrow, setIsNarrow] = useState(false);
 
   return (

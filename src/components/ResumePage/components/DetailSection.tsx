@@ -10,7 +10,7 @@ import {
   SlideIn,
 } from "src/common-components";
 
-export function LeftPanel() {
+export function DetailSection() {
   return (
     <Container>
       <SlideIn>
