@@ -1,5 +1,5 @@
 import cx from "classnames";
-import { ReactNode, RefObject, useRef } from "react";
+import { ReactNode } from "react";
 import { SlideIn } from "src/common-components";
 
 export function TimelineEntry({
@@ -21,17 +21,10 @@ export function TimelineEntry({
   skills: string[];
   continueToNext?: boolean;
 }) {
-  const ref = useRef(null);
-
   return (
-    <SlideIn customRef={ref}>
+    <SlideIn>
       <div className={cx("flex", "flex-row", "gap-[10px]")}>
-        <Years
-          firstYearRef={ref}
-          endYear={endYear}
-          startYear={startYear}
-          continueToNext={continueToNext}
-        />
+        <Years endYear={endYear} startYear={startYear} continueToNext={continueToNext} />
 
         <Line color={color} continueToNext={continueToNext} />
 
@@ -52,12 +45,10 @@ export function TimelineEntry({
 }
 
 function Years({
-  firstYearRef,
   endYear,
   startYear,
   continueToNext = false,
 }: {
-  firstYearRef: RefObject<HTMLDivElement>;
   endYear: number;
   startYear: number;
   continueToNext?: boolean;
@@ -82,13 +73,7 @@ function Years({
       )}
     >
       {Array.from(Array(rowCount)).map((_, index) => (
-        <div
-          ref={index === 0 ? firstYearRef : undefined}
-          key={index}
-          className={cx("break-inside-avoid")}
-        >
-          {endYear - index}
-        </div>
+        <div key={index}>{endYear - index}</div>
       ))}
     </div>
   );
@@ -119,9 +104,6 @@ function Texts({ children }: { children: ReactNode }) {
         "flex-col",
 
         "mb-[10px]",
-
-        "h-fit",
-        "break-inside-avoid",
       )}
     >
       {children}

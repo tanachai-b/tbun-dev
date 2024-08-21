@@ -18,16 +18,7 @@ export function Section({ children }: { children: ReactNode }) {
 
 export function Header({ children }: { children: ReactNode }) {
   return (
-    <div
-      className={cx(
-        "text-[20px]",
-        "tracking-[0.25em]",
-        "font-black",
-        "text-center",
-
-        "break-after-avoid",
-      )}
-    >
+    <div className={cx("text-[20px]", "tracking-[0.25em]", "font-black", "text-center")}>
       {children}
     </div>
   );

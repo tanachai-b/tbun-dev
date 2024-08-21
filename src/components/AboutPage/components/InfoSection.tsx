@@ -7,7 +7,6 @@ export function InfoSection({ children }: { children: ReactNode }) {
       className={cx(
         "flex-auto",
 
-        "h-[500px]",
         "bg-[white]",
 
         "flex",
@@ -22,8 +21,7 @@ export function InfoSection({ children }: { children: ReactNode }) {
           "flex",
           "flex-col",
 
-          "p-[20px]",
-          "pt-[30px]",
+          "p-[30px]",
           "gap-[30px]",
 
           "text-[15px]",

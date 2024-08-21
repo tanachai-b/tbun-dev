@@ -50,10 +50,12 @@ export function Responsive({ children }: { children: ReactNode }) {
       className={cx(
         "flex-auto",
 
-        "grid",
-        !isNarrow ? ["grid-flow-col", "auto-cols-[400px_auto]"] : ["grid-flow-row"],
+        "bg-[#ffffff]",
+
+        "flex",
+        !isNarrow ? ["flex-row", "justify-center"] : ["flex-col"],
       )}
-      onResize={({ width }) => setIsNarrow(width < 800)}
+      onResize={({ width }) => setIsNarrow(width < 700)}
     >
       {children}
     </Resizable>

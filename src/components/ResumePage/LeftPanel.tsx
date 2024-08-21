@@ -69,25 +69,20 @@ export function LeftPanel() {
 
 function Container({ children }: { children: ReactNode }) {
   return (
-    <div
-      className={cx(
-        "bg-[#f0f0f0]",
-
-        "columns-[250px]",
-
-        "p-[30px]",
-        "gap-[30px]",
-
-        "text-[15px]",
-        "text-justify",
-      )}
-    >
+    <div className={cx("flex", "flex-row", "justify-center")}>
       <div
         className={cx(
+          "min-w-[350px]",
+          "max-w-[400px]",
+
           "flex",
           "flex-col",
 
+          "p-[30px]",
           "gap-[30px]",
+
+          "text-[15px]",
+          "text-justify",
         )}
       >
         {children}

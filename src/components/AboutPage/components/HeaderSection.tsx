@@ -8,7 +8,7 @@ export function HeaderSection() {
 
   return (
     <Intersectable
-      className={cx("h-[500px]", "overflow-clip")}
+      className={cx("h-[50vh]", "overflow-clip")}
       onIntersect={(ratio) => ratio > 0.2 && setIsVisible(true)}
     >
       <Resizable

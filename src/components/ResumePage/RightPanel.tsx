@@ -10,42 +10,39 @@ export function RightPanel() {
         <Header>CAREER</Header>
       </SlideIn>
 
-      <MultiColumns>
-        <div className={cx("flex", "flex-col")}>{careerEntries}</div>
-      </MultiColumns>
+      <div className={cx("flex", "flex-col")}>{careerEntries}</div>
 
       <SlideIn>
         <Header>EDUCATION</Header>
       </SlideIn>
 
-      <MultiColumns>{educationEntries}</MultiColumns>
+      {educationEntries}
     </Container>
   );
 }
 
 function Container({ children }: { children: ReactNode }) {
   return (
-    <div
-      className={cx(
-        "bg-[#ffffff]",
+    <div className={cx("flex", "flex-row", "justify-center")}>
+      <div
+        className={cx(
+          "min-w-[350px]",
+          "max-w-[600px]",
 
-        "flex",
-        "flex-col",
+          "flex",
+          "flex-col",
 
-        "p-[30px]",
-        "gap-[30px]",
+          "p-[30px]",
+          "gap-[30px]",
 
-        "text-[15px]",
-        "font-medium",
-      )}
-    >
-      {children}
+          "text-[15px]",
+          "font-medium",
+        )}
+      >
+        {children}
+      </div>
     </div>
   );
-}
-
-function MultiColumns({ children }: { children: ReactNode }) {
-  return <div className={cx("columns-[400px]", "gap-[30px]")}>{children}</div>;
 }
 
 const careerEntries = (
