@@ -1,5 +1,5 @@
 import cx from "classnames";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import { email_logo, github_logo, linkedin_logo } from "src/assets";
 import {
   ContactButton,
@@ -68,10 +68,34 @@ export function DetailSection() {
 }
 
 function Container({ children }: { children: ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  const [top, setTop] = useState(0);
+
+  useEffect(() => {
+    onResize();
+
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  function onResize() {
+    const viewportHeight = window.innerHeight;
+    const height = ref.current?.clientHeight ?? 0;
+
+    const top = Math.min(viewportHeight - height, 50);
+
+    setTop(top);
+  }
+
   return (
     <div className={cx("flex", "flex-row", "justify-center")}>
       <div
+        ref={ref}
         className={cx(
+          "sticky",
+          "h-fit",
+
           "min-w-[350px]",
           "max-w-[400px]",
 
@@ -84,6 +108,7 @@ function Container({ children }: { children: ReactNode }) {
           "text-[15px]",
           "text-justify",
         )}
+        style={{ top: `${top}px` }}
       >
         {children}
       </div>
