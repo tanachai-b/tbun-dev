@@ -10,10 +10,17 @@ export function useNavigation() {
   const [isPageVisible, setIsPageVisible] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => setIsPageVisible(true), 0);
+    setIsPageVisible(true);
   }, []);
 
-  window.addEventListener("popstate", () => setPage(getPageFromPath()));
+  useEffect(() => {
+    window.addEventListener("popstate", onBrowserBackForward);
+    return () => window.removeEventListener("popstate", onBrowserBackForward);
+  }, []);
+
+  function onBrowserBackForward() {
+    setPage(getPageFromPath());
+  }
 
   function navigateTo(toPage: Page, ref?: RefObject<HTMLDivElement>) {
     updatePath(toPage === "apps" ? "" : toPage);

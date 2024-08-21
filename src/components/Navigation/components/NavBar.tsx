@@ -4,7 +4,14 @@ import { ReactNode, useEffect, useState } from "react";
 export function NavBar({ children }: { children: ReactNode }) {
   const [scroll, setScroll] = useState(0);
 
-  useEffect(() => window.addEventListener("scroll", () => setScroll(window.scrollY)), []);
+  useEffect(() => {
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  function onScroll() {
+    setScroll(window.scrollY);
+  }
 
   return (
     <Container>
