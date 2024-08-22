@@ -1,5 +1,5 @@
 import cx from "classnames";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { Intersectable, Resizable } from "src/common-components";
 
 export function HeaderSection() {
@@ -27,17 +27,35 @@ function Container({
   onResize: (boundingClientRect: DOMRect) => void;
   children: ReactNode;
 }) {
+  const [scroll, setScroll] = useState(0);
+
+  useEffect(() => {
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  function onScroll() {
+    setScroll(window.scrollY);
+  }
+
   return (
-    <Intersectable className={cx("h-[50vh]")} onIntersect={onIntersect}>
+    <Intersectable
+      className={cx(
+        "h-[50vh]",
+
+        "sticky",
+        "top-[50px]",
+      )}
+      onIntersect={onIntersect}
+    >
       <Resizable
         className={cx(
-          "size-full",
-
           "grid",
-          "place-items-center",
+          "place-content-center",
 
           "overflow-clip",
         )}
+        style={{ height: `calc(100% - ${scroll}px)` }}
         onResize={onResize}
       >
         {children}

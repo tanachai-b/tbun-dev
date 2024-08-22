@@ -13,8 +13,8 @@ export function Resizable({
   children: ReactNode;
   onResize: (boundingClientRect: DOMRect) => void;
 }) {
-  const baseRef = useRef<HTMLDivElement>(null);
-  const ref = divRef ?? baseRef;
+  const inRef = useRef<HTMLDivElement>(null);
+  const ref = divRef ?? inRef;
 
   useEffect(() => {
     if (!ref.current) return;

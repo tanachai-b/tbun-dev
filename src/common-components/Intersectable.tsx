@@ -1,17 +1,20 @@
-import { CSSProperties, ReactNode, useEffect, useRef } from "react";
+import { CSSProperties, ReactNode, RefObject, useEffect, useRef } from "react";
 
 export function Intersectable({
+  divRef,
   className,
   style,
   children,
   onIntersect,
 }: {
+  divRef?: RefObject<HTMLDivElement>;
   className?: string;
   style?: CSSProperties;
   children: ReactNode;
   onIntersect: (ratio: number) => void;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
+  const inRef = useRef<HTMLDivElement>(null);
+  const ref = divRef ?? inRef;
 
   useEffect(() => {
     if (!ref.current) return;
