@@ -14,7 +14,7 @@ export function NavScreenItem({
         "h-[50px]",
         "px-[80px]",
 
-        "font-bold",
+        "font-medium",
         "text-[15px]",
         "text-right",
 

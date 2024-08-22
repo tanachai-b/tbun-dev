@@ -22,7 +22,7 @@ export function NavBarItem({
 
         "px-[15px]",
 
-        "font-bold",
+        "font-medium",
         "text-[15px]",
 
         "whitespace-pre",

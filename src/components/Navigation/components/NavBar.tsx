@@ -2,7 +2,7 @@ import cx from "classnames";
 import { ReactNode, useEffect, useState } from "react";
 
 export function NavBar({ children }: { children: ReactNode }) {
-  const [scroll, setScroll] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     window.addEventListener("scroll", onScroll);
@@ -10,7 +10,7 @@ export function NavBar({ children }: { children: ReactNode }) {
   }, []);
 
   function onScroll() {
-    setScroll(window.scrollY);
+    setIsVisible(window.scrollY > window.innerHeight / 2);
   }
 
   return (
@@ -19,7 +19,7 @@ export function NavBar({ children }: { children: ReactNode }) {
 
       <Content>{children}</Content>
 
-      <ForegroundShadow isVisible={scroll > window.innerHeight - 100} />
+      <ForegroundShadow isVisible={isVisible} />
     </Container>
   );
 }
