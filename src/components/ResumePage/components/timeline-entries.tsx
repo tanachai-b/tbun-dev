@@ -268,3 +268,41 @@ export const educationEntries: TimelineEntryData[] = [
     ),
   },
 ];
+
+export const credentialEntries: TimelineEntryData[] = [
+  {
+    endYear: 2023,
+    startYear: 2023,
+    color: "#0060e0",
+    company: "Microsoft",
+    role: "Microsoft Certified: Azure Fundamentals",
+    duration: "",
+    skills: ["Azure Cloud", "Azure Architecture", "Azure Services", "Azure Governance"],
+    description: (
+      <>
+        <ul>
+          <li>Describe cloud concepts</li>
+          <li>Describe Azure architecture and services</li>
+          <li>Describe Azure management and governance</li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    endYear: 2022,
+    startYear: 2022,
+    color: "#c000ff",
+    company: "Udemy",
+    role: "The Complete Flutter Development Bootcamp with Dart",
+    duration: "",
+    skills: ["Dart", "Flutter", "Cross-platform Application", "Mobile Application"],
+    description: (
+      <>
+        <ul>
+          <li>Completed the course on Udemy</li>
+          <li>Built cross-platform applications from scratch using Dart and Flutter</li>
+        </ul>
+      </>
+    ),
+  },
+];

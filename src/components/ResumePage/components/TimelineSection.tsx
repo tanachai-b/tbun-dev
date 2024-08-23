@@ -1,7 +1,7 @@
 import cx from "classnames";
 import { ReactNode, useState } from "react";
 import { Header, SlideIn } from "src/common-components";
-import { careerEntries, educationEntries } from "./timeline-entries";
+import { careerEntries, credentialEntries, educationEntries } from "./timeline-entries";
 import { TimelineEntry } from "./TimelineEntry";
 
 export function TimelineSection() {
@@ -39,25 +39,53 @@ export function TimelineSection() {
         <Header>EDUCATION</Header>
       </SlideIn>
 
-      {educationEntries.map((v, i, a) => {
-        const key = `education-${i}`;
-        return (
-          <TimelineEntry
-            key={key}
-            endYear={v.endYear}
-            startYear={v.startYear}
-            color={v.color}
-            company={v.company}
-            role={v.role}
-            duration={v.duration}
-            skills={v.skills}
-            description={v.description}
-            continueToNext={i + 1 < a.length && v.company === a[i + 1].company}
-            isExpanded={key === expandedKey}
-            onClick={() => setExpandedKey(key !== expandedKey ? key : undefined)}
-          />
-        );
-      })}
+      <div className={cx("flex", "flex-col")}>
+        {educationEntries.map((v, i, a) => {
+          const key = `education-${i}`;
+          return (
+            <TimelineEntry
+              key={key}
+              endYear={v.endYear}
+              startYear={v.startYear}
+              color={v.color}
+              company={v.company}
+              role={v.role}
+              duration={v.duration}
+              skills={v.skills}
+              description={v.description}
+              continueToNext={i + 1 < a.length && v.company === a[i + 1].company}
+              isExpanded={key === expandedKey}
+              onClick={() => setExpandedKey(key !== expandedKey ? key : undefined)}
+            />
+          );
+        })}
+      </div>
+
+      <SlideIn>
+        <Header>CREDENTIALS</Header>
+      </SlideIn>
+
+      <div className={cx("flex", "flex-col")}>
+        {credentialEntries.map((v, i, a) => {
+          const key = `credential-${i}`;
+          return (
+            <TimelineEntry
+              key={key}
+              endYear={v.endYear}
+              startYear={v.startYear}
+              color={v.color}
+              company={v.company}
+              role={v.role}
+              duration={v.duration}
+              skills={v.skills}
+              description={v.description}
+              continueToNext={i + 1 < a.length && v.company === a[i + 1].company}
+              isExpanded={key === expandedKey}
+              onClick={() => setExpandedKey(key !== expandedKey ? key : undefined)}
+            />
+          );
+        })}
+      </div>
     </Container>
   );
 }
