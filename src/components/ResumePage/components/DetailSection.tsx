@@ -74,7 +74,6 @@ function Container({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     onResize();
-
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);

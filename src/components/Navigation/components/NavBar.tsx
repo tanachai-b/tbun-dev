@@ -5,6 +5,7 @@ export function NavBar({ children }: { children: ReactNode }) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    onScroll();
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);

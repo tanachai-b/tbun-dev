@@ -30,6 +30,7 @@ function Container({
   const [scroll, setScroll] = useState(0);
 
   useEffect(() => {
+    onScroll();
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
