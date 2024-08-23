@@ -42,7 +42,7 @@ function Container({
   return (
     <Intersectable
       className={cx(
-        "h-[50vh]",
+        "h-[calc(50vh-50px)]",
 
         "sticky",
         "top-[50px]",
