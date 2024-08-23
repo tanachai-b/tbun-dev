@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-type TimelineEntryData = {
+export type TimelineEntryData = {
   endYear: number;
   startYear: number;
   color: string;
