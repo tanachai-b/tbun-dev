@@ -39,8 +39,8 @@ export function SlideIn({
       )}
       style={{ transitionDelay: `${delay}ms` }}
       onIntersect={(ratio) => {
-        ratio <= 0.2 && setDelay(0);
-        ratio > 0.2 && setIsVisible(true);
+        if (ratio <= 0.2) setDelay(0);
+        if (ratio > 0.2) setIsVisible(true);
 
         setTimeout(() => setDelay(0), delay);
       }}
