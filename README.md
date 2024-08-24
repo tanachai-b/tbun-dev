@@ -5,7 +5,7 @@ GitHub Page
 | Location         | Link                                  |
 | ---------------- | ------------------------------------- |
 | GitHub Page      | https://tanachai-b.github.io/tbun-dev |
-| Firebase Hosting | https://tbun.dev/                     |
+| Firebase Hosting | https://www.tbun.dev/                 |
 
 ## Stack
 
@@ -68,6 +68,8 @@ To deploy the app, follow these steps :
 | `npx ncu`                    | Check dependencies for latest versions        |
 | `npx ncu -t semver`          | Same as above but without breaking change     |
 | `npx ncu -t semver --update` | Same as above but also updates `package.json` |
+
+> **Notes:** You need to run `npm i` afterwards
 
 ### Clean-up Dependencies
 
