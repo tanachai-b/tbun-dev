@@ -210,7 +210,7 @@ export const careerEntries: TimelineEntryData[] = [
         <li>Migrated data between SAP systems</li>
         <li>Wrote complex SQL logic to extract data</li>
         <li>Wrote Excel VBA macros to transform and map data</li>
-        <li>Reconciled new and old data before uploaded to the new system.</li>
+        <li>Reconciled new and old data before uploaded to the new system</li>
       </ul>
     ),
   },
