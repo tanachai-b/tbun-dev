@@ -1,6 +1,6 @@
 # tanachai-b/tbun-dev
 
-GitHub Page
+A collection of apps and tools made by TBUN.
 
 | Location         | Link                                  |
 | ---------------- | ------------------------------------- |
@@ -34,7 +34,7 @@ npm run dev
 
 ## Deploy
 
-To deploy the app, follow these steps :
+To deploy the app, follow these steps:
 
 1.  Update version in `package.json`
 2.  Run these commands:
@@ -60,6 +60,12 @@ To deploy the app, follow these steps :
    ```
 
 ### Update Dependencies
+
+Run this command:
+
+```
+npm update --save
+```
 
 #### npm-check-updates
 
