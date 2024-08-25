@@ -25,13 +25,13 @@ body {
   }
 
   *,
-  .light-scrollbar {
+  .dark-scrollbar {
     &::-webkit-scrollbar-track {
-      background: #00000000;
+      background: #ffffff00;
     }
 
     &::-webkit-scrollbar-corner {
-      background: #00000000;
+      background: #ffffff00;
     }
 
     &::-webkit-scrollbar-thumb {
@@ -44,13 +44,13 @@ body {
     }
   }
 
-  .dark-scrollbar {
+  .light-scrollbar {
     &::-webkit-scrollbar-track {
-      background: #ffffff00;
+      background: #00000000;
     }
 
     &::-webkit-scrollbar-corner {
-      background: #ffffff00;
+      background: #00000000;
     }
 
     &::-webkit-scrollbar-thumb {
