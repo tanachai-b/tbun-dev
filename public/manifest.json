@@ -13,8 +13,8 @@
   "start_url": "/",
   "id": "/",
   "display": "standalone",
-  "theme_color": "#ffc000",
-  "background_color": "#ffc000",
+  "theme_color": "#202020",
+  "background_color": "#202020",
 
   "description": "A collection of apps and tools made by TBUN.",
   "screenshots": [
